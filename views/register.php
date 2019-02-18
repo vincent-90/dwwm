@@ -44,7 +44,7 @@ include 'header.php';
                                 <p class="text-danger"><?= isset($formError['mailConfirm']) ? $formError['mailConfirm'] : '' ?></p>
                             </div>
                         </div>
-                        <p class="text-danger"><?= isset($formError['mailError']) ? $formError['mailError'] : '' ?></p>
+                        <div class="text-danger"><?= isset($formError['mailError']) ? $formError['mailError'] : '' ?></div>
                         <div class="form-row">             
                             <label for="password" class="col-sm-2 col-form-label">Mot de passe :</label>
                             <div class="col-sm-10">
@@ -59,7 +59,7 @@ include 'header.php';
                                 <p class="text-danger"><?= isset($formError['passwordConfirm']) ? $formError['passwordConfirm'] : '' ?></p>
                             </div>
                         </div>
-                        <p class="text-danger"><?= isset($formError['passwordError']) ? $formError['passwordError'] : '' ?></p>
+                        <div class="text-danger"><?= isset($formError['passwordError']) ? $formError['passwordError'] : '' ?></div>
                         <div class="form-row">
                             <div class="col-sm-12">
                                 <input type="submit" value="S'inscrire" name="submit"/>

@@ -20,13 +20,11 @@ class users {
     //méthode permettant d'enregistrer un utilisateur dans la base de données.
     public function addUser() {
         $query = 'INSERT INTO `dwwm_users` (`username`, `mail`, `password`, `avatar`, `id_dwwm_grades`)'
-                . ' VALUES (:username, :mail, :password, "../assets/img/gameboy.jpg", 2)';
+                . ' VALUES (:username, :mail, :password, "", 2)';
         $queryResult = $this->db->prepare($query);
         $queryResult->bindValue(':username', $this->username, PDO::PARAM_STR);
         $queryResult->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $queryResult->bindValue(':password', $this->password, PDO::PARAM_STR);
-        //$queryResult->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
-        //$queryResult->bindValue(':id_dwwm_grades', $this->id_dwwm_grades, PDO::PARAM_INT);
         return $queryResult->execute();
     }
     
@@ -43,28 +41,64 @@ class users {
         }
         return $result;
     }
+
+    //méthode qui retourne le hashage du mot de passer d'un compte.
+    function getUserHash() {
+        $query = 'SELECT `password` FROM `dwwm_users` WHERE `mail` = :mail';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $queryResult->execute();
+        return $queryResult->fetch(PDO::FETCH_OBJ);
+    }
+
+    //méthode permettant de récupèrer les informations de l'utilisateur une fois connecté.
+    function getUserInfo() {
+        $query = 'SELECT * FROM `dwwm_users` WHERE `mail` = :mail';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $queryResult->execute();
+        return $queryResult->fetch(PDO::FETCH_OBJ);
+    }
     
-    //méthode permettant à un utilisateur de se connecter.
-    public function userLogin() {
-        $return = FALSE;
-        $isOk = FALSE;
-        $query = 'SELECT * FROM `dwwm_users` WHERE `mail` = :mail AND `password` = :password';
-        $queryUser = $this->db->prepare($query);
-        $queryUser->bindValue(':mail', $this->mail, PDO::PARAM_STR);
-        $queryUser->bindValue(':password', $this->password, PDO::PARAM_STR);
-        //si la requête est bien executé, on rempli $return (array) avec un objet
-        if ($queryUser->execute()) {
-            $return = $queryUser->fetch(PDO::FETCH_OBJ);
+    //méthode permettant de modifier le profil d'un utilisateur.
+    public function updateProfile() {
+        $query = 'UPDATE `dwwm_users` SET `username`= :username, `mail`= :mail, `password`= :password WHERE `id`= :id';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':username', $this->username, PDO::PARAM_STR);
+        $queryResult->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $queryResult->bindValue(':password', $this->password, PDO::PARAM_STR);
+        //$queryResult->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryResult->execute();
+    }
+    
+    //méthode permettant la suppression d'un compte.
+    public function deleteUser() {
+        $query = 'DELETE FROM `dwwm_users` WHERE `id` = :id LIMIT 1';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $result = $queryResult->execute();
+        return $result;
+    }
+    
+    //méthode permettant de récuperer la liste des membres.
+    public function getUsersList() {
+        $result = array();
+        $query = 'SELECT `id`, `username`, `mail` FROM `dwwm_users` ORDER BY `username`';
+        $queryResult = $this->db->query($query);
+        if (is_object($queryResult)){
+            $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         }
-        //si $return est un objet alors on hydrate
-        if (is_object($return)) {
-            $this->username = $return->username;
-            $this->avatar = $return->avatar;
-            $this->id = $return->id;
-            $this->id_dwwm_grades = $return->id_dwwm_grades;
-            $isOk = TRUE;
-        }
-        return $isOk;
+        return $result;
+    }
+    
+    //méthode permettant de modifier un avatar.
+    public function updateAvatar() {
+        $query = 'UPDATE `dwwm_users` SET `avatar`= :avatar WHERE `id`= :id';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryResult->execute();
     }
     
 }

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../models/users.php';
 include '../controllers/loginCtrl.php';
 include 'header.php';
@@ -9,8 +8,8 @@ include 'header.php';
     <div class="row">
         <div class="text-center col-12">
             <h1>Connexion</h1>
-            <p class="text-danger"><?= isset($formError['userLogin']) ? $formError['userLogin'] : '' ?></p>
-            <form method="POST" action="">
+            
+            <form method="POST" action="#">
                 <fieldset>
                     <legend><strong>Accéder à mon compte</strong></legend>
                     <div class="form-group">
@@ -36,7 +35,6 @@ include 'header.php';
                     </div>
                 </fieldset>
             </form>
-            <?php var_dump($_POST['mailLogin']); ?>
         </div>
     </div>
 </div>

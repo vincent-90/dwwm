@@ -13,3 +13,12 @@
 body .navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
     color: lightgreen;
 }
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    background-color: #3d3c3c;
+    padding: 10px;
+    color: blueviolet;
+}
+.navbar .dropdown-menu a:hover{
+    background-color: #545454;
+    color: lightgreen;
+}
