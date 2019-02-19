@@ -138,7 +138,7 @@ if (isset($_POST['submitAvatar'])) {
             //on verifie l'ext du fichier envoyé
             if (in_array($extUpload, $extValides)) {
                 session_start();
-                $chemin = "../uploads/".$_SESSION['id'].".".$extUpload;
+                $chemin = "../uploads/avatars/".$_SESSION['id'].".".$extUpload;
                 //move_uploaded_file permet de rediriger le fichier
                 $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
                 if ($resultat) {

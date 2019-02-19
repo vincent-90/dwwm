@@ -43,7 +43,7 @@ include 'header.php';
                     </table>
                 </div>
             <div>
-                <img src="../uploads/<?= $_SESSION['avatar']; ?>" width="150" />
+                <img src="../uploads/avatars/<?= $_SESSION['avatar']; ?>" width="150" />
             </div>
             <p class="text-danger"><?= isset($formError['avatar']) ? $formError['avatar'] : '' ?></p>
             <p class="text-success"><?= isset($avatarMessage) ? $avatarMessage : '' ?></p>

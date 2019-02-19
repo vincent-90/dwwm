@@ -1,6 +1,10 @@
 <?php
-
+$isConsole = FALSE;
 $consoles = new consoles();
+if (!empty($_GET['id'])){
+    $consoles->id = htmlspecialchars($_GET['id']);
+    $isConsole = $consoles->consoleDetail();
+}
 
 //déclaration des regex :
 $dateRegex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/';
@@ -88,20 +92,19 @@ if (isset($_POST['submit'])) {
     
 
     if (count($formError) == 0) {
-        session_start();
+        //session_start();
         $consoles->name = $name;
         $consoles->summary = $summary;
         $consoles->date = $date;
         $consoles->image = $chemin;
-        $consoles->id_dwwm_users = $_SESSION['id'];
-        $checkConsole = $consoles->checkFreeConsole();
-
-        if ($checkConsole === '1') {
-            $formError['checkConsole'] = 'Cette console est déjà enregistrée.';
-        } else if ($checkConsole === '0') {
-            $isSuccess = $consoles->addConsoles();
+        //$consoles->id_dwwm_users = $_SESSION['id'];
+        //$checkConsole = $consoles->checkFreeConsole();
+        $consoles->updateConsole();
+        
+       if ($consoles->updateConsole()){
+            $isSuccess = TRUE;
         } else {
-            $formError['checkConsole'] = 'Le développeur est en pause';
+            $isError = TRUE;
         }
     }
 }

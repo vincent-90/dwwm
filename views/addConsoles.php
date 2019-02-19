@@ -11,6 +11,7 @@ include 'header.php';
             <?php if ($isSuccess) { ?>
                  <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
                 <p class="text-success">Enregistrement effectué !</p>
+                
                 <?php
             }
             if ($isError) {
@@ -19,18 +20,11 @@ include 'header.php';
                 <p class="text-danger">Désolé, le compte n'a pu être créer.</p>
             <?php } ?>
             <p class="text-danger"><?= isset($formError['checkConsole']) ? $formError['checkConsole'] : '' ?></p>
-            
             <form method="POST" action="" enctype="multipart/form-data">
                 <fieldset>
                     <legend><strong>Ajouter une console</strong></legend>
                     <div class="form-group">
-                        <div class="form-row">             
-                            <label for="image" class="col-sm-2 col-form-label">Photo :</label>
-                            <div class="col-sm-10">
-                                <input name="image" type="file" class="form-control" id="image" placeholder="Photo de la console" value="<?= isset($image) ? $image : '' ?>"/>
-                                <p class="text-danger"><?= isset($formError['image']) ? $formError['image'] : '' ?></p>
-                            </div>
-                        </div>
+                        
                         <div class="form-row">             
                             <label for="name" class="col-sm-2 col-form-label">Nom de la console :</label>
                             <div class="col-sm-10">
@@ -52,7 +46,13 @@ include 'header.php';
                                 <p class="text-danger"><?= isset($formError['date']) ? $formError['date'] : '' ?></p>
                             </div>
                         </div>
-                        
+                        <div class="form-row">             
+                            <label for="image" class="col-sm-2 col-form-label">Photo :</label>
+                            <div class="col-sm-10">
+                                <input name="image" type="file" class="form-control" id="image" placeholder="Photo de la console" value="<?= isset($image) ? $image : '' ?>"/>
+                                <p class="text-danger"><?= isset($formError['image']) ? $formError['image'] : '' ?></p>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="col-sm-12">
                                 <input type="submit" value="envoyer" name="submit"/>

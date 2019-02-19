@@ -63,10 +63,10 @@ include '../controllers/headerCtrl.php';
                         <?php } ?>
 
                         <li class="nav-item">
-                            <a class="nav-link hoverable" href="#">Liste des jeux</a>
+                            <a class="nav-link hoverable" href="gamesList.php">Liste des jeux</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link hoverable" href="#">Liste des consoles</a>
+                            <a class="nav-link hoverable" href="consolesList.php">Liste des consoles</a>
                         </li>
 
                         

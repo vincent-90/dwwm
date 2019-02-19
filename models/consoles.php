@@ -42,4 +42,59 @@ class consoles {
         return $result;
     }
     
+    //méthode permettant de récuperer la liste des consoles.
+    public function getConsolesList() {
+        $result = array();
+        $query = 'SELECT `id`, `image`, `name`, `summary`, `date` FROM `dwwm_consoles` ORDER BY `name`';
+        $queryResult = $this->db->query($query);
+        if (is_object($queryResult)){
+            $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
+        }
+        return $result;
+    }
+    
+    //méthode permettant de récuperer le détail d'une console d'après son id.
+    public function consoleDetail() {
+        $return = FALSE;
+        $isOk = FALSE;
+        $query = 'SELECT `image`, `name`, `summary`, DATE_FORMAT(`date`, "%d/%m/%Y") AS `date`, DATE_FORMAT(`date`, "%Y-%m-%d") AS `dateUS` FROM `dwwm_consoles` WHERE `id`= :id';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        //si la requête est bien executé, on rempli $return (array) avec un objet
+        if ($queryResult->execute()) {
+            $return = $queryResult->fetch(PDO::FETCH_OBJ);
+        }
+        //si $return est un objet alors on hydrate
+        if (is_object($return)) {
+            $this->image = $return->image;
+            $this->name = $return->name;
+            $this->summary = $return->summary;
+            $this->date = $return->date;
+            $this->dateUS = $return->dateUS;
+            $isOk = TRUE;
+        }
+        return $isOk;
+    }
+    
+    //méthode permettant de modifier les informations d'une console.
+    public function updateConsole() {
+        $query = 'UPDATE `dwwm_consoles` SET `image`= :image, `name`= :name, `summary`= :summary, `date`= :date WHERE `id`= :id';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':image', $this->image, PDO::PARAM_STR);
+        $queryResult->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $queryResult->bindValue(':summary', $this->summary, PDO::PARAM_STR);
+        $queryResult->bindValue(':date', $this->date, PDO::PARAM_STR);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryResult->execute();
+    }
+    
+    //méthode permettant la suppression d'une console (et de ses jeux).
+    public function deleteConsole() {
+        $query = 'DELETE FROM `dwwm_consoles` WHERE `id` = :id LIMIT 1';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $result = $queryResult->execute();
+        return $result;
+    }
+    
 }
