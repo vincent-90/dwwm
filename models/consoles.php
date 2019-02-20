@@ -1,5 +1,7 @@
 <?php
+
 class consoles {
+
     public $id = 0;
     public $name = '';
     public $image = '';
@@ -8,6 +10,7 @@ class consoles {
     public $id_dwwm_status = 0;
     public $id_dwwm_users = 0;
     private $db;
+
     public function __construct() {
         try {
             $this->db = new PDO('mysql:host=dwwm;dbname=dwwm;charset=utf8', 'vincent', 'Pingouin02');
@@ -15,7 +18,7 @@ class consoles {
             $ex->getMessage();
         }
     }
-    
+
     //méthode permettant d'ajouter une console dans la base de données.
     public function addConsoles() {
         $query = 'INSERT INTO `dwwm_consoles` (`name`, `image`, `summary`, `date`, `id_dwwm_status`, `id_dwwm_users`) VALUES (:name, :image, :summary, :date, 1, :id_dwwm_users)';
@@ -24,11 +27,10 @@ class consoles {
         $queryResult->bindValue(':image', $this->image, PDO::PARAM_STR);
         $queryResult->bindValue(':summary', $this->summary, PDO::PARAM_STR);
         $queryResult->bindValue(':date', $this->date, PDO::PARAM_STR);
-        //$queryResult->bindValue(':id_dwwm_status', $this->id_dwwm_status, PDO::PARAM_INT);
         $queryResult->bindValue(':id_dwwm_users', $this->id_dwwm_users, PDO::PARAM_INT);
         return $queryResult->execute();
     }
-    
+
     //méthode permettant de vérifier si une console n'est pas déjà enregistrer.
     public function checkFreeConsole() {
         $result = FALSE;
@@ -41,18 +43,18 @@ class consoles {
         }
         return $result;
     }
-    
+
     //méthode permettant de récuperer la liste des consoles.
     public function getConsolesList() {
         $result = array();
-        $query = 'SELECT `id`, `image`, `name`, `summary`, `date` FROM `dwwm_consoles` ORDER BY `name`';
+        $query = 'SELECT `id`, `image`, `name`, `summary`, DATE_FORMAT(`date`, "%d/%m/%Y") AS `date` FROM `dwwm_consoles` ORDER BY `name`';
         $queryResult = $this->db->query($query);
-        if (is_object($queryResult)){
+        if (is_object($queryResult)) {
             $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         }
         return $result;
     }
-    
+
     //méthode permettant de récuperer le détail d'une console d'après son id.
     public function consoleDetail() {
         $return = FALSE;
@@ -75,7 +77,7 @@ class consoles {
         }
         return $isOk;
     }
-    
+
     //méthode permettant de modifier les informations d'une console.
     public function updateConsole() {
         $query = 'UPDATE `dwwm_consoles` SET `image`= :image, `name`= :name, `summary`= :summary, `date`= :date WHERE `id`= :id';
@@ -87,8 +89,8 @@ class consoles {
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryResult->execute();
     }
-    
-    //méthode permettant la suppression d'une console (et de ses jeux).
+
+    //méthode permettant la suppression d'une console.
     public function deleteConsole() {
         $query = 'DELETE FROM `dwwm_consoles` WHERE `id` = :id LIMIT 1';
         $queryResult = $this->db->prepare($query);
@@ -96,5 +98,5 @@ class consoles {
         $result = $queryResult->execute();
         return $result;
     }
-    
+
 }

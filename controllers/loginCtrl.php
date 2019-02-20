@@ -30,7 +30,6 @@ if (isset($_POST['submitLogin'])) {
         $hash = $users->getUserHash();
         if (is_object($hash)) {
             $isConnect = password_verify($passwordLogin, $hash->password);
-            //l'utilisateur est connecté
             if ($isConnect) {
                 $userInfo = $users->getUserInfo();
                 session_start();

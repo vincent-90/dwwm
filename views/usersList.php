@@ -6,9 +6,8 @@ include 'header.php';
 <div class="container-fluid">
     <div class="row">
         <div class="text-center col-12">
-            <h1>Liste des patients</h1>
-            
-             <?php
+            <h1>Liste des membres</h1>
+            <?php
             if (isset($_GET['idDelete'])) {
                 if ($isDelete) {
                     ?>
@@ -19,8 +18,7 @@ include 'header.php';
                 }
             }
             ?>
-            
-             <div class="table-responsive">
+            <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -34,14 +32,13 @@ include 'header.php';
                             <tr>
                                 <td><?= $user->username ?></td>
                                 <td><?= $user->mail ?></td>
-                                <td><a class="btn blue-gradient btn-lg btn-block" href="usersList.php?idDelete=<?= $user->id ?>">Effacer</a></td>
+                                <td><a class="btn btn-amber" href="usersList.php?idDelete=<?= $user->id ?>">Effacer</a></td>
                             </tr>
                         <?php } ?>                 
                     </tbody>
                 </table>
             </div>
-            
-             </div>
+        </div>
     </div>
 </div>
 <?php include 'footer.php'; ?>

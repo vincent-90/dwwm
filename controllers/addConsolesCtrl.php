@@ -1,42 +1,43 @@
 <?php
 
+session_start();
 $consoles = new consoles();
 
 //déclaration des regex :
 $dateRegex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/';
-$nameRegex = '/^[a-zA-Z0-9- ]+$/'; //à modifier
-
+$nameRegex = '/^[a-zA-Z0-9- ]+$/';
+$textRegex = '/^[0-9a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-\'" .,?!:;()]+$/';
 //création d'un tableau où l'on vient stocker les erreurs :
 $formError = array();
 $isSuccess = FALSE;
 $isError = FALSE;
+//initialisation de variables de stockage des informations pour éviter d'avoir des erreurs dans la vue.
+$name = '';
+$summary = '';
 
-//si le submit existe
-if (isset($_POST['submit'])) {
-    
-
+if (isset($_POST['submitConsole'])) {
     if (isset($_POST['name'])) {
         if (!empty($_POST['name'])) {
-            //on vérifie si $_POST['name'] respecte la regex
             if (preg_match($nameRegex, $_POST['name'])) {
                 $name = htmlspecialchars($_POST['name']);
-                //sinon on stock un message dans le tableau formError    
             } else {
-                $formError['name'] = 'Erreur, le pseudo ne peut avoir que des lettres et/ou des chiffres.';
+                $formError['name'] = 'Erreur, saisie invalide.';
             }
         } else {
             $formError['name'] = 'Erreur, veuillez remplir le champ.';
         }
     }
-
     if (isset($_POST['summary'])) {
         if (!empty($_POST['summary'])) {
+            if (preg_match($textRegex, $_POST['summary'])) {
             $summary = htmlspecialchars($_POST['summary']);
+            } else {
+                $formError['summary'] = 'Erreur, saisie invalide.';
+            }
         } else {
             $formError['summary'] = 'Erreur, veuillez remplir le champ.';
         }
     }
-
     if (isset($_POST['date'])) {
         if (!empty($_POST['date'])) {
             if (preg_match($dateRegex, $_POST['date'])) {
@@ -48,60 +49,52 @@ if (isset($_POST['submit'])) {
             $formError['date'] = 'Erreur, veuillez sélectionnez une date.';
         }
     }
-    
-        //on vérifie que file avatar existe et qu'il possede bien un nom
-    if (isset($_FILES['image'])){ 
+
+    //on vérifie que $_FILES['image'] existe et qu'il possède bien un nom
+    if (isset($_FILES['image'])) {
         if (!empty($_FILES['image']['name'])) {
-        $tailleMax = 5097152; //environ 5Mo
-        $extValides = array ('jpg', 'jpeg', 'gif', 'png');
-        //on verifie la taille du fichier importé
-        if ($_FILES['image']['size'] <= $tailleMax) {
-            //strtolower convertie une chaîne en minuscule
-            //substr permet d'ignore un caractère (ici le point)
-            //strrchr récupére l'ext du fichier
-            $extUpload = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
-            //on verifie l'ext du fichier envoyé
-            if (in_array($extUpload, $extValides)) {
-                //session_start();
-                $chemin = "../uploads/consoles/".$name.".".$extUpload;
-                //move_uploaded_file permet de rediriger le fichier
-                $resultat = move_uploaded_file($_FILES['image']['tmp_name'], $chemin);
-                if ($resultat) {
-                    $accountMessage = 'Félicitations, l\'avatar a bien été modifié.';
-                 //   $updateAvatar = $users->updateAvatar();
-//                    if($updateAvatar){
-//                    $users->avatar = $resultat;
-//                    }
+            $sizeMax = 5097152; //environ 5Mo
+            $validExt = array('jpg', 'jpeg', 'gif', 'png');
+            //on vérifie la taille du fichier importé
+            if ($_FILES['image']['size'] <= $sizeMax) {
+                //strtolower convertie une chaîne de caractère en minuscule
+                //substr permet d'ignorer un caractère (ici le point)
+                //strrchr récupére l'extension du fichier
+                $uploadExt = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
+                //on vérifie l'extension du fichier envoyé
+                if (in_array($uploadExt, $validExt)) {
+                    $way = "../uploads/consoles/" . $name . "." . $uploadExt;
+                    //move_uploaded_file permet de rediriger le fichier
+                    $result = move_uploaded_file($_FILES['image']['tmp_name'], $way);
+                    if ($result) {
+                        $image = $name . "." . $uploadExt;
+                    } else {
+                        $formError['image'] = "Echec de l'upload";
+                    }
                 } else {
-                    $formError['image'] = "echec de l'upload";
+                    $formError['image'] = "Erreur, ne sont accepter que les formats jpg, jpeg, gif ou png.";
                 }
             } else {
-                $formError['image']= "mauvais format";
+                $formError['image'] = "Erreur, votre fichier ne doit pas dépasser 5 Mo.";
             }
         } else {
-            $formError['image'] = "votre fichier ne doit pas dépasser 2 Mo.";
-        }
-        } else {
-            $formError['image']= "veuillez sélectionner un fichier";
+            $formError['image'] = "Erreur, veuillez sélectionner un fichier.";
         }
     }
-    
 
     if (count($formError) == 0) {
-        session_start();
         $consoles->name = $name;
         $consoles->summary = $summary;
         $consoles->date = $date;
-        $consoles->image = $chemin;
+        $consoles->image = $image;
         $consoles->id_dwwm_users = $_SESSION['id'];
         $checkConsole = $consoles->checkFreeConsole();
-
         if ($checkConsole === '1') {
             $formError['checkConsole'] = 'Cette console est déjà enregistrée.';
         } else if ($checkConsole === '0') {
             $isSuccess = $consoles->addConsoles();
         } else {
-            $formError['checkConsole'] = 'Le développeur est en pause';
+            $formError['checkConsole'] = 'Echec.';
         }
     }
 }

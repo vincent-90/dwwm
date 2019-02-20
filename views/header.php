@@ -1,9 +1,8 @@
 <?php
-//session_start();
-if(session_status() == PHP_SESSION_NONE){
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-//include_once '../models/users.php';
+include_once '../models/users.php';
 include '../controllers/headerCtrl.php';
 ?>
 <!DOCTYPE html>
@@ -28,49 +27,41 @@ include '../controllers/headerCtrl.php';
                         <li class="nav-item">
                             <a class="nav-link hoverable" href="index.php">Accueil</a>
                         </li>
-
                         <?php if (isset($_SESSION['isConnect'])) { ?>
-                            
                             <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown"><?= $_SESSION['username']; ?></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="profile.php?id=<?= $_SESSION['id']; ?>">Afficher profil</a>
-                                <a class="dropdown-item" href="?action=disconnect">Déconnexion</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown">Participer</a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="addGames.php">Ajouter un jeu</a>
-                                <a class="dropdown-item" href="addConsoles.php">Ajouter une console</a>
-                            </div>
-                        </li>
-                        <?php if($_SESSION['id_dwwm_grades'] == 1) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link hoverable" href="usersList.php">Liste des membres</a>
-                        </li>
-                        <?php } ?>
-                        
-                        <?php } else { ?>
-
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown"><?= $_SESSION['username']; ?></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="profile.php?id=<?= $_SESSION['id']; ?>">Afficher profil</a>
+                                    <a class="dropdown-item" href="?action=disconnect">Déconnexion</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown">Participer</a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="addGames.php">Ajouter un jeu</a>
+                                    <a class="dropdown-item" href="addConsoles.php">Ajouter une console</a>
+                                </div>
+                            </li>
+                            <?php if ($_SESSION['id_dwwm_grades'] == 1) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link hoverable" href="usersList.php">Liste des membres</a>
+                                </li>
+                            <?php }
+                        } else {
+                            ?>
                             <li class="nav-item">
                                 <a class="nav-link hoverable" href="register.php">Inscription</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link hoverable" href="login.php">Connexion</a>
                             </li>
-
                         <?php } ?>
-
                         <li class="nav-item">
                             <a class="nav-link hoverable" href="gamesList.php">Liste des jeux</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link hoverable" href="consolesList.php">Liste des consoles</a>
                         </li>
-
-                        
-
                     </ul>
                 </div>
             </nav>

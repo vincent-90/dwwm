@@ -7,24 +7,19 @@ include 'header.php';
     <div class="row">
         <div class="text-center col-12">
             <h1>Ajouter une console</h1>
-            
             <?php if ($isSuccess) { ?>
-                 <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
                 <p class="text-success">Enregistrement effectué !</p>
-                
                 <?php
             }
             if ($isError) {
                 ?>
-                <p class="text-danger"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
-                <p class="text-danger">Désolé, le compte n'a pu être créer.</p>
+                <p class="text-danger">Désolé, la console n'a pu être enregistrer.</p>
             <?php } ?>
             <p class="text-danger"><?= isset($formError['checkConsole']) ? $formError['checkConsole'] : '' ?></p>
             <form method="POST" action="" enctype="multipart/form-data">
                 <fieldset>
-                    <legend><strong>Ajouter une console</strong></legend>
+                    <legend><strong>Proposer une console</strong></legend>
                     <div class="form-group">
-                        
                         <div class="form-row">             
                             <label for="name" class="col-sm-2 col-form-label">Nom de la console :</label>
                             <div class="col-sm-10">
@@ -42,7 +37,7 @@ include 'header.php';
                         <div class="form-row">             
                             <label for="date" class="col-sm-2 col-form-label">Date de sortie (France) :</label>
                             <div class="col-sm-10">
-                                <input name="date" type="date" class="form-control" id="date" placeholder="" value=""/>
+                                <input name="date" type="date" class="form-control" id="date" />
                                 <p class="text-danger"><?= isset($formError['date']) ? $formError['date'] : '' ?></p>
                             </div>
                         </div>
@@ -55,7 +50,7 @@ include 'header.php';
                         </div>
                         <div class="form-row">
                             <div class="col-sm-12">
-                                <input type="submit" value="envoyer" name="submit"/>
+                                <input type="submit" value="Envoyer" name="submitConsole"/>
                             </div>
                         </div>
                     </div>

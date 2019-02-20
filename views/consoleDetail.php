@@ -20,7 +20,7 @@ include 'header.php';
                     <?php if ($isConsole) { ?>
                         <tbody>
                             <tr>
-                                <td><img src="<?= $consoles->image; ?>" width="150" /></td>
+                                <td><img src="../uploads/consoles/<?= $consoles->image; ?>" width="150" /></td>
                                 <td><?= $consoles->name ?></td>
                                 <td><?= $consoles->summary ?></td>
                                 <td><?= $consoles->date ?></td>
@@ -31,8 +31,7 @@ include 'header.php';
             <?php } else { ?>
                 <div>La console n'a pas été trouvée !</div>
             <?php } ?>
-                
-                            <h2>Modifier infos :</h2>
+            <h2>Modifier les informations</h2>
             <?php if ($isSuccess) { ?>
                 <p class="text-success">Modifications enregistrées !</p>
                 <?php
@@ -41,12 +40,10 @@ include 'header.php';
                 ?>
                 <p class="text-danger">Désolé, les modifications n'ont pu être enregistrées.</p>
             <?php } ?>
-    
-                <form method="POST" action="consoleDetail.php?id=<?= $consoles->id ?>" enctype="multipart/form-data">
+            <form method="POST" action="consoleDetail.php?id=<?= $consoles->id ?>" enctype="multipart/form-data">
                 <fieldset>
-                    <legend><strong>modif</strong></legend>
+                    <legend><strong>Modifications</strong></legend>
                     <div class="form-group">
-                        
                         <div class="form-row">             
                             <label for="name" class="col-sm-2 col-form-label">Nom de la console :</label>
                             <div class="col-sm-10">
@@ -83,8 +80,7 @@ include 'header.php';
                     </div>
                 </fieldset>
             </form>
-                
-                <p><a href="consolesList.php">Retour</a> à la liste des consoles.</p>
+            <p><a href="consolesList.php">Retour</a> à la liste des consoles.</p>
         </div>
     </div>
 </div>

@@ -9,14 +9,12 @@ include 'header.php';
             <h1>Inscription</h1>
             <?php if ($isSuccess) { ?>
                  <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
-                <p class="text-success">Enregistrement effectué !</p>
                 <p><a href="login.php">Cliquez ici</a> pour vous authentifier.</p>
                 <?php
             }
             if ($isError) {
                 ?>
                 <p class="text-danger"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
-                <p class="text-danger">Désolé, le compte n'a pu être créer.</p>
             <?php } ?>
             <p class="text-danger"><?= isset($formError['checkUser']) ? $formError['checkUser'] : '' ?></p>
             <form method="POST" action="">

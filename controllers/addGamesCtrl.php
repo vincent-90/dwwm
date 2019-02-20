@@ -1,32 +1,33 @@
 <?php
 
 session_start();
-$isConsole = FALSE;
 $consoles = new consoles();
-if (!empty($_GET['id'])) {
-    $consoles->id = htmlspecialchars($_GET['id']);
-    $isConsole = $consoles->consoleDetail();
-}
+$consolesList = $consoles->getConsolesList();
+
+$games = new games();
 
 //déclaration des regex :
 $dateRegex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/';
-$nameRegex = '/^[a-zA-Z0-9- ]+$/';
+$titleRegex = '/^[0-9a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\- ?!:;]+$/';
 $textRegex = '/^[0-9a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-\'" .,?!:;()]+$/';
 //création d'un tableau où l'on vient stocker les erreurs :
 $formError = array();
 $isSuccess = FALSE;
 $isError = FALSE;
+//initialisation de variables de stockage des informations pour éviter d'avoir des erreurs dans la vue.
+$title = '';
+$summary = '';
 
-if (isset($_POST['submit'])) {
-    if (isset($_POST['name'])) {
-        if (!empty($_POST['name'])) {
-            if (preg_match($nameRegex, $_POST['name'])) {
-                $name = htmlspecialchars($_POST['name']);
+if (isset($_POST['submitGame'])) {
+    if (isset($_POST['title'])) {
+        if (!empty($_POST['title'])) {
+            if (preg_match($titleRegex, $_POST['title'])) {
+                $title = htmlspecialchars($_POST['title']);
             } else {
-                $formError['name'] = 'Erreur, saisie invalide.';
+                $formError['title'] = 'Erreur, saisie invalide.';
             }
         } else {
-            $formError['name'] = 'Erreur, veuillez remplir le champ.';
+            $formError['title'] = 'Erreur, veuillez remplir le champ.';
         }
     }
     if (isset($_POST['summary'])) {
@@ -65,11 +66,11 @@ if (isset($_POST['submit'])) {
                 $uploadExt = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
                 //on vérifie l'extension du fichier envoyé
                 if (in_array($uploadExt, $validExt)) {
-                    $way = "../uploads/consoles/" . $name . "." . $uploadExt;
+                    $way = "../uploads/games/" . $title . "." . $uploadExt;
                     //move_uploaded_file permet de rediriger le fichier
                     $result = move_uploaded_file($_FILES['image']['tmp_name'], $way);
                     if ($result) {
-                        $image = $name . "." . $uploadExt;
+                        $image = $title . "." . $uploadExt;
                     } else {
                         $formError['image'] = "Echec de l'upload";
                     }
@@ -84,16 +85,28 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    if (count($formError) == 0) {
-        $consoles->name = $name;
-        $consoles->summary = $summary;
-        $consoles->date = $date;
-        $consoles->image = $image;
-        $consoles->updateConsole();
-        if ($consoles->updateConsole()) {
-            $isSuccess = TRUE;
+    if (isset($_POST['idConsole'])) {
+        if (!empty($_POST['idConsole'])) {
+            $idConsole = htmlspecialchars($_POST['idConsole']);
         } else {
-            $isError = TRUE;
+            $formError['idConsole'] = 'Erreur, veuillez sélectionnez une console.';
+        }
+    }
+
+    if (count($formError) == 0) {
+        $games->title = $title;
+        $games->summary = $summary;
+        $games->date = $date;
+        $games->image = $image;
+        $games->id_dwwm_consoles = $idConsole;
+        $games->id_dwwm_users = $_SESSION['id'];
+        $checkGame = $games->checkFreeGame();
+        if ($checkGame === '1') {
+            $formError['checkGame'] = 'Ce jeu est déjà enregistré.';
+        } else if ($checkGame === '0') {
+            $isSuccess = $games->addGames();
+        } else {
+            $formError['checkGame'] = 'Echec.';
         }
     }
 }
