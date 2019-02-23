@@ -1,6 +1,6 @@
 <?php
-include '../models/consoles.php';
-include '../controllers/consoleDetailCtrl.php';
+include '../configuration.php';
+include '../controllers/consoleDetailsCtrl.php';
 include 'header.php';
 ?>
 <div class="container-fluid">
@@ -13,11 +13,11 @@ include 'header.php';
                         <tr>
                             <th scope="col">Photo</th>
                             <th scope="col">Nom</th>
-                            <th scope="col">Summary</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date de sortie</th>
                         </tr>
                     </thead>
-                    <?php if ($isConsole) { ?>
+                    <?php if ($consoleDetail) { ?>
                         <tbody>
                             <tr>
                                 <td><img src="../uploads/consoles/<?= $consoles->image; ?>" width="150" /></td>
@@ -31,18 +31,38 @@ include 'header.php';
             <?php } else { ?>
                 <div>La console n'a pas été trouvée !</div>
             <?php } ?>
-            <h2>Modifier les informations</h2>
-            <?php if ($isSuccess) { ?>
-                <p class="text-success">Modifications enregistrées !</p>
-                <?php
-            }
-            if ($isError) {
-                ?>
-                <p class="text-danger">Désolé, les modifications n'ont pu être enregistrées.</p>
-            <?php } ?>
-            <form method="POST" action="consoleDetail.php?id=<?= $consoles->id ?>" enctype="multipart/form-data">
+            <h2>Modifications</h2>
+            <form method="POST" action="" enctype="multipart/form-data">
                 <fieldset>
-                    <legend><strong>Modifications</strong></legend>
+                    <legend><strong>Changer de photo</strong></legend>
+                    <p class="text-success"><?= isset($imageMessage) ? $imageMessage : '' ?></p>
+                    <p class="text-danger"><?= isset($formError['image']) ? $formError['image'] : '' ?></p>
+                    <div class="form-group">
+                        <div class="form-row">             
+                            <label for="image" class="col-sm-2 col-form-label">Photo :</label>
+                            <div class="col-sm-10">
+                                <input name="image" type="file" class="form-control" id="image"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-sm-12">
+                                <input type="submit" value="Changer d'image" name="submitImage"/>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <form method="POST" action="consoleDetails.php?id=<?= $consoles->id ?>" enctype="multipart/form-data">
+                <fieldset>
+                    <legend><strong>Modifier les informations</strong></legend>
+                    <?php if ($isSuccess) { ?>
+                        <p class="text-success"><?= isset($updateMessage) ? $updateMessage : '' ?></p>
+                        <?php
+                    }
+                    if ($isError) {
+                        ?>
+                        <p class="text-danger"><?= isset($updateMessage) ? $updateMessage : '' ?></p>
+                    <?php } ?>
                     <div class="form-group">
                         <div class="form-row">             
                             <label for="name" class="col-sm-2 col-form-label">Nom de la console :</label>
@@ -54,7 +74,7 @@ include 'header.php';
                         <div class="form-row">             
                             <label for="summary" class="col-sm-2 col-form-label">Description :</label>
                             <div class="col-sm-10">
-                                <input name="summary" type="text" class="form-control" id="summary" placeholder="<?= $consoles->summary; ?>" value="<?= $consoles->summary; ?>"/>
+                                <textarea name="summary" type="text" class="form-control" id="summary" placeholder="<?= $consoles->summary; ?>"></textarea>
                                 <p class="text-danger"><?= isset($formError['summary']) ? $formError['summary'] : '' ?></p>
                             </div>
                         </div>
@@ -65,16 +85,10 @@ include 'header.php';
                                 <p class="text-danger"><?= isset($formError['date']) ? $formError['date'] : '' ?></p>
                             </div>
                         </div>
-                        <div class="form-row">             
-                            <label for="image" class="col-sm-2 col-form-label">Photo :</label>
-                            <div class="col-sm-10">
-                                <input name="image" type="file" class="form-control" id="image" placeholder="<?= $consoles->image; ?>" value="<?= $consoles->image; ?>"/>
-                                <p class="text-danger"><?= isset($formError['image']) ? $formError['image'] : '' ?></p>
-                            </div>
-                        </div>
+
                         <div class="form-row">
                             <div class="col-sm-12">
-                                <input type="submit" value="envoyer" name="submit"/>
+                                <input type="submit" value="Modifier" name="submit"/>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 <?php
-include '../models/consoles.php';
+include '../configuration.php';
 include '../controllers/consolesListCtrl.php';
 include 'header.php';
 ?>
@@ -39,7 +39,7 @@ include 'header.php';
                                 <td><?= $console->name; ?></td>
                                 <td><?= $console->summary; ?></td>
                                 <td><?= $console->date; ?></td>
-                                <td><a class="btn btn-lime" href="consoleDetail.php?id=<?= $console->id; ?>">Détails</a></td>
+                                <td><a class="btn btn-lime" href="consoleDetails.php?id=<?= $console->id; ?>">Détails</a></td>
                                 <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
                                 <td><a class="btn btn-amber" href="consolesList.php?idDelete=<?= $console->id ?>">Effacer</a></td>
                                 <?php } ?>

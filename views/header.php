@@ -1,8 +1,4 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-include_once '../models/users.php';
 include '../controllers/headerCtrl.php';
 ?>
 <!DOCTYPE html>

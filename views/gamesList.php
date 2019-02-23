@@ -1,5 +1,5 @@
 <?php
-include '../models/games.php';
+include '../configuration.php';
 include '../controllers/gamesListCtrl.php';
 include 'header.php';
 ?>
@@ -7,7 +7,17 @@ include 'header.php';
     <div class="row">
         <div class="text-center col-12">
             <h1>Liste des jeux</h1>
-
+<?php
+            if (isset($_GET['idDelete'])) {
+                if ($isDelete) {
+                    ?>
+                    <p class="text-success">Le jeu est bien supprimé !</p>
+                <?php } else { ?>
+                    <p class="text-danger">Echec de la suppression !</p>
+                    <?php
+                }
+            }
+            ?>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -15,10 +25,12 @@ include 'header.php';
                             <th scope="col">Jaquette</th>
                             <th scope="col">Console</th>
                             <th scope="col">Titre</th>
-                            <th scope="col">Synopsis</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Date de sortie</th>
                             <th scope="col">Détail</th>
-                       
+                            <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
+                            <th scope="col">Effacer</th>
+                            <?php } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,10 +39,12 @@ include 'header.php';
                                 <td><img src="../uploads/games/<?= $game->image; ?>" width="150" /></td>
                                 <td><?= $game->name; ?></td>
                                 <td><?= $game->title; ?></td>
-                                <td><?= $console->summary; ?></td>
-                                <td><?= $console->date; ?></td>
-                                <td><a class="btn btn-lime" href="gameDetail.php?id=<?= $game->id; ?>">Détails</a></td>
-                      
+                                <td><?= $game->summary; ?></td>
+                                <td><?= $game->date; ?></td>
+                                <td><a class="btn btn-lime" href="gameDetails.php?id=<?= $game->id; ?>">Détails</a></td>
+                      <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
+                                <td><a class="btn btn-amber" href="gamesList.php?idDelete=<?= $game->id ?>">Effacer</a></td>
+                                <?php } ?>
                             </tr>
                         <?php } ?>                 
                     </tbody>

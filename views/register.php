@@ -1,5 +1,5 @@
 <?php
-include '../models/users.php';
+include '../configuration.php';
 include '../controllers/registerCtrl.php';
 include 'header.php';
 ?>
@@ -60,7 +60,7 @@ include 'header.php';
                         <div class="text-danger"><?= isset($formError['passwordError']) ? $formError['passwordError'] : '' ?></div>
                         <div class="form-row">
                             <div class="col-sm-12">
-                                <input type="submit" value="S'inscrire" name="submit"/>
+                                <input class="btn btn-light-green" type="submit" value="S'inscrire" name="submit"/>
                             </div>
                         </div>
                     </div>

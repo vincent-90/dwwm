@@ -1,5 +1,5 @@
 <?php
-include '../models/consoles.php';
+include '../configuration.php';
 include '../controllers/addConsolesCtrl.php';
 include 'header.php';
 ?>
@@ -30,7 +30,7 @@ include 'header.php';
                         <div class="form-row">             
                             <label for="summary" class="col-sm-2 col-form-label">Description :</label>
                             <div class="col-sm-10">
-                                <input name="summary" type="text" class="form-control" id="summary" placeholder="Description" value="<?= isset($summary) ? $summary : '' ?>"/>
+                                <textarea name="summary" type="text" class="form-control" id="summary" placeholder="Description" value="<?= isset($summary) ? $summary : '' ?>"></textarea>
                                 <p class="text-danger"><?= isset($formError['summary']) ? $formError['summary'] : '' ?></p>
                             </div>
                         </div>

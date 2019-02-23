@@ -1,5 +1,5 @@
 <?php
-include '../models/users.php';
+include '../configuration.php';
 include '../controllers/loginCtrl.php';
 include 'header.php';
 ?>

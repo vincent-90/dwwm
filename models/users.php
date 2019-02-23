@@ -1,6 +1,6 @@
 <?php
 
-class users {
+class users extends database {
 
     public $id = 0;
     public $username = '';
@@ -8,14 +8,9 @@ class users {
     public $password = '';
     public $avatar = '';
     public $id_dwwm_grades = 0;
-    private $db;
 
     public function __construct() {
-        try {
-            $this->db = new PDO('mysql:host=dwwm;dbname=dwwm;charset=utf8', 'vincent', 'Pingouin02');
-        } catch (Exception $ex) {
-            $ex->getMessage();
-        }
+        parent::__construct();
     }
 
     //méthode permettant d'enregistrer un utilisateur dans la base de données.
@@ -72,7 +67,7 @@ class users {
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryResult->execute();
     }
-
+    
     //méthode permettant de modifier un avatar.
     public function updateAvatar() {
         $query = 'UPDATE `dwwm_users` SET `avatar`= :avatar WHERE `id`= :id';

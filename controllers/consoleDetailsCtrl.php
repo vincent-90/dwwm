@@ -1,17 +1,13 @@
 <?php
 
-session_start();
-$isConsole = FALSE;
 $consoles = new consoles();
 if (!empty($_GET['id'])) {
     $consoles->id = htmlspecialchars($_GET['id']);
-    $isConsole = $consoles->consoleDetail();
+    $consoleDetail = $consoles->consoleDetail();
 }
 
 //déclaration des regex :
 $dateRegex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/';
-$nameRegex = '/^[a-zA-Z0-9- ]+$/';
-$textRegex = '/^[0-9a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-\'" .,?!:;()]+$/';
 //création d'un tableau où l'on vient stocker les erreurs :
 $formError = array();
 $isSuccess = FALSE;
@@ -20,22 +16,14 @@ $isError = FALSE;
 if (isset($_POST['submit'])) {
     if (isset($_POST['name'])) {
         if (!empty($_POST['name'])) {
-            if (preg_match($nameRegex, $_POST['name'])) {
                 $name = htmlspecialchars($_POST['name']);
-            } else {
-                $formError['name'] = 'Erreur, saisie invalide.';
-            }
         } else {
             $formError['name'] = 'Erreur, veuillez remplir le champ.';
         }
     }
     if (isset($_POST['summary'])) {
         if (!empty($_POST['summary'])) {
-            if (preg_match($textRegex, $_POST['summary'])) {
                 $summary = htmlspecialchars($_POST['summary']);
-            } else {
-                $formError['summary'] = 'Erreur, saisie invalide.';
-            }
         } else {
             $formError['summary'] = 'Erreur, veuillez remplir le champ.';
         }
@@ -51,10 +39,28 @@ if (isset($_POST['submit'])) {
             $formError['date'] = 'Erreur, veuillez sélectionnez une date.';
         }
     }
+    if (isset($name) && isset($summary) && isset($date)) {
+        $updateMessage = 'Félicitations, les informations ont bien été enregistrées.';
+    } else {
+        $updateMessage = 'Désolé, les informations n\'ont pu être modifiées.';
+    }
 
-    //on vérifie que $_FILES['image'] existe et qu'il possède bien un nom
-    if (isset($_FILES['image'])) {
-        if (!empty($_FILES['image']['name'])) {
+    if (count($formError) == 0) {
+        $consoles->name = $name;
+        $consoles->summary = $summary;
+        $consoles->date = $date;
+        $consoles->updateConsole();
+        if ($consoles->updateConsole()) {
+            $isSuccess = TRUE;
+        } else {
+            $isError = TRUE;
+        }
+    }
+}
+
+    if (isset($_POST['submitImage'])) {
+        //on vérifie que $_FILES['image'] existe et qu'il possède bien un nom
+        if (isset($_FILES['image']) and !empty($_FILES['image']['name'])) {
             $sizeMax = 5097152; //environ 5Mo
             $validExt = array('jpg', 'jpeg', 'gif', 'png');
             //on vérifie la taille du fichier importé
@@ -65,11 +71,12 @@ if (isset($_POST['submit'])) {
                 $uploadExt = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
                 //on vérifie l'extension du fichier envoyé
                 if (in_array($uploadExt, $validExt)) {
-                    $way = "../uploads/consoles/" . $name . "." . $uploadExt;
+                    $way = "../uploads/consoles/" . $consoles->name . "." . $uploadExt;
                     //move_uploaded_file permet de rediriger le fichier
                     $result = move_uploaded_file($_FILES['image']['tmp_name'], $way);
                     if ($result) {
-                        $image = $name . "." . $uploadExt;
+                        $imageMessage = 'Félicitations, l\'image a bien été modifié.';
+                        $image = $consoles->name . "." . $uploadExt;
                     } else {
                         $formError['image'] = "Echec de l'upload";
                     }
@@ -82,18 +89,15 @@ if (isset($_POST['submit'])) {
         } else {
             $formError['image'] = "Erreur, veuillez sélectionner un fichier.";
         }
-    }
-
+        
     if (count($formError) == 0) {
-        $consoles->name = $name;
-        $consoles->summary = $summary;
-        $consoles->date = $date;
         $consoles->image = $image;
-        $consoles->updateConsole();
-        if ($consoles->updateConsole()) {
+        $consoles->updatePicture();
+        if ($consoles->updatePicture()) {
             $isSuccess = TRUE;
         } else {
             $isError = TRUE;
         }
     }
-}
+        
+    }

@@ -1,15 +1,11 @@
 <?php
 
-session_start();
 $consoles = new consoles();
 $consolesList = $consoles->getConsolesList();
-
 $games = new games();
 
 //déclaration des regex :
 $dateRegex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/';
-$titleRegex = '/^[0-9a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\- ?!:;]+$/';
-$textRegex = '/^[0-9a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-\'" .,?!:;()]+$/';
 //création d'un tableau où l'on vient stocker les erreurs :
 $formError = array();
 $isSuccess = FALSE;
@@ -21,22 +17,14 @@ $summary = '';
 if (isset($_POST['submitGame'])) {
     if (isset($_POST['title'])) {
         if (!empty($_POST['title'])) {
-            if (preg_match($titleRegex, $_POST['title'])) {
-                $title = htmlspecialchars($_POST['title']);
-            } else {
-                $formError['title'] = 'Erreur, saisie invalide.';
-            }
+            $title = htmlspecialchars($_POST['title']);
         } else {
             $formError['title'] = 'Erreur, veuillez remplir le champ.';
         }
     }
     if (isset($_POST['summary'])) {
         if (!empty($_POST['summary'])) {
-            if (preg_match($textRegex, $_POST['summary'])) {
-                $summary = htmlspecialchars($_POST['summary']);
-            } else {
-                $formError['summary'] = 'Erreur, saisie invalide.';
-            }
+            $summary = htmlspecialchars($_POST['summary']);
         } else {
             $formError['summary'] = 'Erreur, veuillez remplir le champ.';
         }

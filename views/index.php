@@ -1,4 +1,7 @@
-<?php include 'header.php'; ?>
+<?php
+include '../configuration.php';
+include 'header.php'; 
+?>
 <div class="container-fluid wall">
     <div class="row">
         <div class="col-md-6">

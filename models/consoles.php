@@ -1,6 +1,6 @@
 <?php
 
-class consoles {
+class consoles extends database {
 
     public $id = 0;
     public $name = '';
@@ -9,14 +9,9 @@ class consoles {
     public $date = '00/00/0000';
     public $id_dwwm_status = 0;
     public $id_dwwm_users = 0;
-    private $db;
 
     public function __construct() {
-        try {
-            $this->db = new PDO('mysql:host=dwwm;dbname=dwwm;charset=utf8', 'vincent', 'Pingouin02');
-        } catch (Exception $ex) {
-            $ex->getMessage();
-        }
+        parent::__construct();
     }
 
     //méthode permettant d'ajouter une console dans la base de données.
@@ -47,7 +42,7 @@ class consoles {
     //méthode permettant de récuperer la liste des consoles.
     public function getConsolesList() {
         $result = array();
-        $query = 'SELECT `id`, `image`, `name`, `summary`, DATE_FORMAT(`date`, "%d/%m/%Y") AS `date` FROM `dwwm_consoles` ORDER BY `name`';
+        $query = 'SELECT `id`, `image`, `name`, `summary`, DATE_FORMAT(`date`, "%d/%b/%Y") AS `date` FROM `dwwm_consoles` ORDER BY `name`';
         $queryResult = $this->db->query($query);
         if (is_object($queryResult)) {
             $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
@@ -80,12 +75,20 @@ class consoles {
 
     //méthode permettant de modifier les informations d'une console.
     public function updateConsole() {
-        $query = 'UPDATE `dwwm_consoles` SET `image`= :image, `name`= :name, `summary`= :summary, `date`= :date WHERE `id`= :id';
+        $query = 'UPDATE `dwwm_consoles` SET `name`= :name, `summary`= :summary, `date`= :date WHERE `id`= :id';
         $queryResult = $this->db->prepare($query);
-        $queryResult->bindValue(':image', $this->image, PDO::PARAM_STR);
         $queryResult->bindValue(':name', $this->name, PDO::PARAM_STR);
         $queryResult->bindValue(':summary', $this->summary, PDO::PARAM_STR);
         $queryResult->bindValue(':date', $this->date, PDO::PARAM_STR);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryResult->execute();
+    }
+    
+    //méthode permettant de modifier la photo d'une console.
+    public function updatePicture() {
+        $query = 'UPDATE `dwwm_consoles` SET `image`= :image WHERE `id`= :id';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':image', $this->image, PDO::PARAM_STR);
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryResult->execute();
     }

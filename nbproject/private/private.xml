@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/vincent/www/dwwm/controllers/consolesListCtrl.php</file>
-            <file>file:/home/vincent/www/dwwm/controllers/addConsolesCtrl.php</file>
-            <file>file:/home/vincent/www/dwwm/views/addConsoles.php</file>
-            <file>file:/home/vincent/www/dwwm/views/consolesList.php</file>
-            <file>file:/home/vincent/www/dwwm/views/consoleDetail.php</file>
-            <file>file:/home/vincent/www/dwwm/models/consoles.php</file>
-            <file>file:/home/vincent/www/dwwm/controllers/consoleDetailCtrl.php</file>
+            <file>file:/home/vincent/www/dwwm/views/profile.php</file>
+            <file>file:/home/vincent/www/dwwm/views/usersList.php</file>
+            <file>file:/home/vincent/www/dwwm/controllers/usersListCtrl.php</file>
+            <file>file:/home/vincent/www/dwwm/controllers/profileCtrl.php</file>
         </group>
     </open-files>
 </project-private>

@@ -1,12 +1,9 @@
 <?php
 
-session_start();
 $consoles = new consoles();
 
 //déclaration des regex :
 $dateRegex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/';
-$nameRegex = '/^[a-zA-Z0-9- ]+$/';
-$textRegex = '/^[0-9a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-\'" .,?!:;()]+$/';
 //création d'un tableau où l'on vient stocker les erreurs :
 $formError = array();
 $isSuccess = FALSE;
@@ -18,22 +15,14 @@ $summary = '';
 if (isset($_POST['submitConsole'])) {
     if (isset($_POST['name'])) {
         if (!empty($_POST['name'])) {
-            if (preg_match($nameRegex, $_POST['name'])) {
-                $name = htmlspecialchars($_POST['name']);
-            } else {
-                $formError['name'] = 'Erreur, saisie invalide.';
-            }
+            $name = htmlspecialchars($_POST['name']);
         } else {
             $formError['name'] = 'Erreur, veuillez remplir le champ.';
         }
     }
     if (isset($_POST['summary'])) {
         if (!empty($_POST['summary'])) {
-            if (preg_match($textRegex, $_POST['summary'])) {
             $summary = htmlspecialchars($_POST['summary']);
-            } else {
-                $formError['summary'] = 'Erreur, saisie invalide.';
-            }
         } else {
             $formError['summary'] = 'Erreur, veuillez remplir le champ.';
         }

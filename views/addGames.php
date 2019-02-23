@@ -1,6 +1,5 @@
 <?php
-include '../models/consoles.php';
-include '../models/games.php';
+include '../configuration.php';
 include '../controllers/addGamesCtrl.php';
 include 'header.php';
 ?>
@@ -31,7 +30,7 @@ include 'header.php';
                         <div class="form-row">             
                             <label for="summary" class="col-sm-2 col-form-label">Synopsis :</label>
                             <div class="col-sm-10">
-                                <input name="summary" type="text" class="form-control" id="summary" placeholder="Résumé du jeu" value="<?= isset($summary) ? $summary : '' ?>"/>
+                                <textarea name="summary" type="text" class="form-control" id="summary" placeholder="Résumé du jeu" value="<?= isset($summary) ? $summary : '' ?>"></textarea>
                                 <p class="text-danger"><?= isset($formError['summary']) ? $formError['summary'] : '' ?></p>
                             </div>
                         </div>

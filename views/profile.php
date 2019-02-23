@@ -1,5 +1,5 @@
 <?php
-include '../models/users.php';
+include '../configuration.php';
 include '../controllers/profileCtrl.php';
 include 'header.php';
 ?>
@@ -41,12 +41,12 @@ include 'header.php';
                         </tbody>
                     </table>
                 </div>
-                <p class="text-success"><?= isset($avatarMessage) ? $avatarMessage : '' ?></p>
-                <p class="text-danger"><?= isset($formError['avatar']) ? $formError['avatar'] : '' ?></p>
-                <h2>Avatar</h2>
+                <h2>Modifications</h2>
                 <form method="POST" action="" enctype="multipart/form-data">
                     <fieldset>
                         <legend><strong>Modifier photo de profil</strong></legend>
+                        <p class="text-success"><?= isset($avatarMessage) ? $avatarMessage : '' ?></p>
+                        <p class="text-danger"><?= isset($formError['avatar']) ? $formError['avatar'] : '' ?></p>
                         <div class="form-group">
                             <div class="form-row">             
                                 <label for="avatar" class="col-sm-2 col-form-label">Avatar :</label>
@@ -62,19 +62,18 @@ include 'header.php';
                         </div>
                     </fieldset>
                 </form>
-                <h2>Modifications</h2>
-                <?php if ($isSuccess) { ?>
-                    <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
-                    <?php
-                }
-                if ($isError) {
-                    ?>
-                    <p class="text-danger"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
-                <?php } ?>
-                <p class="text-danger"><?= isset($formError['checkUser']) ? $formError['checkUser'] : '' ?></p>
                 <form method="POST" action="">
                     <fieldset>
                         <legend><strong>Modifier profil</strong></legend>
+                        <?php if ($isSuccess) { ?>
+                            <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
+                            <?php
+                        }
+                        if ($isError) {
+                            ?>
+                            <p class="text-danger"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
+                        <?php } ?>
+                            <p class="text-danger"><?= isset($formError['checkUser']) ? $formError['checkUser'] : '' ?></p>
                         <div class="form-group">
                             <div class="form-row">             
                                 <label for="username" class="col-sm-2 col-form-label">Pseudo :</label>
