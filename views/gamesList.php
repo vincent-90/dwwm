@@ -3,17 +3,17 @@ include '../configuration.php';
 include '../controllers/gamesListCtrl.php';
 include 'header.php';
 ?>
-<div class="container-fluid">
+<div class="container-fluid pattern">
     <div class="row">
         <div class="text-center col-12">
-            <h1>Liste des jeux</h1>
+            <h1 class="title">Liste des jeux</h1>
 <?php
             if (isset($_GET['idDelete'])) {
                 if ($isDelete) {
                     ?>
-                    <p class="text-success">Le jeu est bien supprimé !</p>
+                    <p class="text-success form">Le jeu est bien supprimé !</p>
                 <?php } else { ?>
-                    <p class="text-danger">Echec de la suppression !</p>
+                    <p class="text-danger form">Echec de la suppression !</p>
                     <?php
                 }
             }
@@ -25,8 +25,7 @@ include 'header.php';
                             <th scope="col">Jaquette</th>
                             <th scope="col">Console</th>
                             <th scope="col">Titre</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Date de sortie</th>
+                            <th scope="col">Sortie</th>
                             <th scope="col">Détail</th>
                             <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
                             <th scope="col">Effacer</th>
@@ -36,10 +35,9 @@ include 'header.php';
                     <tbody>
                         <?php foreach ($gamesList as $game) { ?>
                             <tr>
-                                <td><img src="../uploads/games/<?= $game->image; ?>" width="150" /></td>
+                                <td><img src="../uploads/games/<?= $game->image; ?>" width="150" class="img-fluid"/></td>
                                 <td><?= $game->name; ?></td>
                                 <td><?= $game->title; ?></td>
-                                <td><?= $game->summary; ?></td>
                                 <td><?= $game->date; ?></td>
                                 <td><a class="btn btn-lime" href="gameDetails.php?id=<?= $game->id; ?>">Détails</a></td>
                       <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>

@@ -14,7 +14,7 @@ include '../controllers/headerCtrl.php';
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark elegant-color">
-                <a class="navbar-brand" href="index.php">DWWM</a>
+                <a class="navbar-brand" href="index.php"><img src="../assets/img/Logo1.png" width="150"/></a>
                 <button class="navbar-toggler special-color-dark hoverable" type="button" data-toggle="collapse" data-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,7 +28,7 @@ include '../controllers/headerCtrl.php';
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown"><?= $_SESSION['username']; ?></a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="profile.php?id=<?= $_SESSION['id']; ?>">Afficher profil</a>
-                                    <a class="dropdown-item" href="?action=disconnect">Déconnexion</a>
+                                    <a class="dropdown-item" href="?action=disconnect">Deconnexion</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

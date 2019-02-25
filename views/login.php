@@ -3,12 +3,12 @@ include '../configuration.php';
 include '../controllers/loginCtrl.php';
 include 'header.php';
 ?>
-<div class="container-fluid">
+<div class="container-fluid pattern">
     <div class="row">
         <div class="text-center col-12">
-            <h1>Connexion</h1>
+            <h1 class="title">Connexion</h1>
             <form method="POST" action="">
-                <fieldset>
+                <fieldset class="form">
                     <legend><strong>Accéder à mon compte</strong></legend>
                     <div class="form-group">
                         <div class="form-row">             

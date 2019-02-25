@@ -26,7 +26,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="index.php">DWWM</a>
+        <a href="index.php">L'amour est dans le play</a>
     </div>
     <!-- Copyright -->
 
@@ -35,7 +35,6 @@
 <script type="text/javascript" src="../assets/MDB-Free_4.6.1/js/popper.min.js"></script>
 <script type="text/javascript" src="../assets/MDB-Free_4.6.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../assets/MDB-Free_4.6.1/js/mdb.min.js"></script>
-<!--mon script ici-->
 </body>
 </html>
 

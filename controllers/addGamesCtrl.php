@@ -10,9 +10,6 @@ $dateRegex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/';
 $formError = array();
 $isSuccess = FALSE;
 $isError = FALSE;
-//initialisation de variables de stockage des informations pour éviter d'avoir des erreurs dans la vue.
-$title = '';
-$summary = '';
 
 if (isset($_POST['submitGame'])) {
     if (isset($_POST['title'])) {

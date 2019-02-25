@@ -3,11 +3,14 @@ include '../configuration.php';
 include '../controllers/addGamesCtrl.php';
 include 'header.php';
 ?>
-<div class="container-fluid">
+<div class="container-fluid pattern">
     <div class="row">
         <div class="text-center col-12">
-            <h1>Ajouter un jeu</h1>
-            <?php if ($isSuccess) { ?>
+            <h1 class="title">Ajouter un jeu</h1>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <fieldset class="form">
+                    <legend><strong>Proposer un jeu</strong></legend>
+                               <?php if ($isSuccess) { ?>
                 <p class="text-success">Enregistrement effectué !</p>
                 <?php
             }
@@ -16,35 +19,32 @@ include 'header.php';
                 <p class="text-danger">Désolé, le jeu n'a pu être enregistrer.</p>
             <?php } ?>
             <p class="text-danger"><?= isset($formError['checkGame']) ? $formError['checkGame'] : '' ?></p>
-            <form method="POST" action="" enctype="multipart/form-data">
-                <fieldset>
-                    <legend><strong>Proposer un jeu</strong></legend>
                     <div class="form-group">
                         <div class="form-row">             
-                            <label for="title" class="col-sm-2 col-form-label">Titre :</label>
-                            <div class="col-sm-10">
+                            <label for="title" class="col-sm-4 col-form-label">Titre du jeu :</label>
+                            <div class="col-sm-8">
                                 <input name="title" type="text" class="form-control" id="title" placeholder="Titre du jeu" value="<?= isset($title) ? $title : '' ?>"/>
                                 <p class="text-danger"><?= isset($formError['title']) ? $formError['title'] : '' ?></p>
                             </div>
                         </div>
                         <div class="form-row">             
-                            <label for="summary" class="col-sm-2 col-form-label">Synopsis :</label>
-                            <div class="col-sm-10">
+                            <label for="summary" class="col-sm-4 col-form-label">Description :</label>
+                            <div class="col-sm-8">
                                 <textarea name="summary" type="text" class="form-control" id="summary" placeholder="Résumé du jeu" value="<?= isset($summary) ? $summary : '' ?>"></textarea>
                                 <p class="text-danger"><?= isset($formError['summary']) ? $formError['summary'] : '' ?></p>
                             </div>
                         </div>
                         <div class="form-row">             
-                            <label for="date" class="col-sm-2 col-form-label">Date de sortie (France) :</label>
-                            <div class="col-sm-10">
-                                <input name="date" type="date" class="form-control" id="date" />
+                            <label for="date" class="col-sm-4 col-form-label">Date de sortie (France) :</label>
+                            <div class="col-sm-8">
+                                <input name="date" type="date" class="form-control" id="date" value="<?= isset($date) ? $date : '' ?>"/>
                                 <p class="text-danger"><?= isset($formError['date']) ? $formError['date'] : '' ?></p>
                             </div>
                         </div>
                         <div class="form-row">             
-                            <label for="image" class="col-sm-2 col-form-label">Jaquette :</label>
-                            <div class="col-sm-10">
-                                <input name="image" type="file" class="form-control" id="image" placeholder="Jaquette du jeu" value="<?= isset($image) ? $image : '' ?>"/>
+                            <label for="image" class="col-sm-offset-2 col-sm-4 col-form-label">Jaquette :</label>
+                            <div class="col-sm-offset-2 col-sm-4">
+                                <input name="image" type="file" id="image" placeholder="Jaquette du jeu"/>
                                 <p class="text-danger"><?= isset($formError['image']) ? $formError['image'] : '' ?></p>
                             </div>
                         </div>

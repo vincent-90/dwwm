@@ -15,9 +15,6 @@ $dateRegex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/';
 $formError = array();
 $isSuccess = FALSE;
 $isError = FALSE;
-//initialisation de variables de stockage des informations pour éviter d'avoir des erreurs dans la vue.
-$title = '';
-$summary = '';
 
 if (isset($_POST['submitGame'])) {
     if (isset($_POST['title'])) {
@@ -105,7 +102,7 @@ if (isset($_POST['submitImage'])) {
     }
 
     if (count($formError) == 0) {
-        $games->title = $title;
+        //$games->title = $title;
         $games->image = $image;
         $games->updateImage();
         if ($games->updateImage()) {

@@ -3,23 +3,23 @@ include '../configuration.php';
 include '../controllers/registerCtrl.php';
 include 'header.php';
 ?>
-<div class="container-fluid">
+<div class="container-fluid pattern">
     <div class="row">
         <div class="text-center col-12">
-            <h1>Inscription</h1>
-            <?php if ($isSuccess) { ?>
-                 <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
-                <p><a href="login.php">Cliquez ici</a> pour vous authentifier.</p>
-                <?php
-            }
-            if ($isError) {
-                ?>
-                <p class="text-danger"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
-            <?php } ?>
-            <p class="text-danger"><?= isset($formError['checkUser']) ? $formError['checkUser'] : '' ?></p>
+            <h1 class="title">Inscription</h1>
             <form method="POST" action="">
-                <fieldset>
+                <fieldset class="form">
                     <legend><strong>Créer un compte</strong></legend>
+                    <?php if ($isSuccess) { ?>
+                        <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
+                        <p><a href="login.php">Cliquez ici</a> pour vous authentifier.</p>
+                        <?php
+                    }
+                    if ($isError) {
+                        ?>
+                        <p class="text-danger"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
+                    <?php } ?>
+                    <p class="text-danger"><?= isset($formError['checkUser']) ? $formError['checkUser'] : '' ?></p>
                     <div class="form-group">
                         <div class="form-row">             
                             <label for="username" class="col-sm-2 col-form-label">Pseudo :</label>

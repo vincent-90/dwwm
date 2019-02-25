@@ -1,14 +1,29 @@
+@font-face{
+    font-family: 'Play-Regular.ttf';
+    src: url(../fonts/Play/Play-Regular.ttf) format("truetype");
+}
+@font-face{
+    font-family: 'Poppins-Regular.ttf';
+    src: url(../fonts/Poppins/Poppins-Regular.ttf) format("truetype");
+}
+@font-face{
+    font-family: 'sega.ttf';
+    src: url(../fonts/sega/SEGA.TTF) format("truetype");
+}
 .wall{
     background-image: url('../img/game.jpg'); 
+    background-attachment: fixed;
     background-repeat: no-repeat; 
     background-size: cover; 
-    background-position: center center;
+    background-position: center;
 }
+
 .window{
+    font-family: 'Poppins-Regular.ttf';
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 10px;
-    padding: 6px;
-    margin: 10px;
+    padding: 10px;
+    margin: 20px;
 }
 body .navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
     color: lightgreen;
@@ -22,9 +37,13 @@ body .navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
     background-color: #545454;
     color: lightgreen;
 }
+.navbar{
+    font-family: 'sega.ttf'; 
+}
 
-/*.pattern{
-    background-image: url('../img/pscover.png');
+.pattern{
+    font-family: 'Play-Regular.ttf';
+    background-image: url('../img/pscover3.png');
     color: snow;
 }
 .form{
@@ -38,4 +57,38 @@ legend{
     border: 3px solid #00f3ab;
     border-radius: 10px;
     background-color: #2e2e2e;
-}*/
+}
+
+th{
+    border: 4px solid #00f3ab;
+    border-collapse: collapse;
+    background-color: #2e2e2e;
+    color: #737DCA;
+}
+td{
+    border: 2px solid snow;
+    border-collapse: collapse;
+    background-color: #1a1a1a;
+    color: snow;
+}
+thead{
+    border: 4px solid #00f3ab;
+}
+tbody{
+    border: 4px solid #00f3ab;
+}
+
+.title{
+    font-size: 6vh;
+    color: #00f3ab;
+    margin: 20px;
+    border: 2px solid #00f3ab;
+    border-radius: 10px;
+    background-color: #545353;
+}
+.modal-title {
+    color: blue;
+}
+.modal-body {
+    color: blue;
+}

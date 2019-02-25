@@ -89,7 +89,7 @@ class users extends database {
     //méthode permettant de récuperer la liste des membres.
     public function getUsersList() {
         $result = array();
-        $query = 'SELECT `id`, `username`, `mail` FROM `dwwm_users` ORDER BY `username`';
+        $query = 'SELECT `id`, `username`, `mail`, `avatar` FROM `dwwm_users` ORDER BY `username`';
         $queryResult = $this->db->query($query);
         if (is_object($queryResult)) {
             $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
