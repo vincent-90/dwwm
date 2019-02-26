@@ -41,7 +41,7 @@ include 'header.php';
                                 <td><?= $game->date; ?></td>
                                 <td><a class="btn btn-lime" href="gameDetails.php?id=<?= $game->id; ?>">Détails</a></td>
                       <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
-                                <td><a class="btn btn-amber" href="gamesList.php?idDelete=<?= $game->id ?>">Effacer</a></td>
+                                <td><a class="btn btn-danger" href="gamesList.php?idDelete=<?= $game->id ?>">Effacer</a></td>
                                 <?php } ?>
                             </tr>
                         <?php } ?>                 

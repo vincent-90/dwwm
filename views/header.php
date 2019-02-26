@@ -34,8 +34,8 @@ include '../controllers/headerCtrl.php';
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown">Participer</a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="addGames.php">Ajouter un jeu</a>
                                     <a class="dropdown-item" href="addConsoles.php">Ajouter une console</a>
+                                    <a class="dropdown-item" href="addGames.php">Ajouter un jeu</a>
                                 </div>
                             </li>
                             <?php if ($_SESSION['id_dwwm_grades'] == 1) { ?>
@@ -53,10 +53,10 @@ include '../controllers/headerCtrl.php';
                             </li>
                         <?php } ?>
                         <li class="nav-item">
-                            <a class="nav-link hoverable" href="gamesList.php">Liste des jeux</a>
+                            <a class="nav-link hoverable" href="consolesList.php">Liste des consoles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link hoverable" href="consolesList.php">Liste des consoles</a>
+                            <a class="nav-link hoverable" href="gamesList.php">Liste des jeux</a>
                         </li>
                     </ul>
                 </div>

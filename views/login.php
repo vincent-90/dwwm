@@ -27,7 +27,7 @@ include 'header.php';
                         </div>
                         <div class="form-row">
                             <div class="col-sm-12">
-                                <input type="submit" value="Se connecter" name="submitLogin"/>
+                                <input class="btn btn-light-green" type="submit" value="Se connecter" name="submitLogin"/>
                             </div>
                         </div>
                     </div>

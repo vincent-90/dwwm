@@ -1,13 +1,18 @@
 <?php
+//instanciation de l'objet users. 
+//$users devient une instance de la classe users.
+//la méthode magique construct est appelée automatiquement grâce au mot clé new.
 $users = new users();
+//création d'un tableau où l'on vient stocker les erreurs :
 $formError = array();
-//On initialise les variables de stockage des informations pour éviter d'avoir des erreurs dans la vue.
-$mailLogin = '';
-$passwordLogin = '';
 
+//si le submit existe
 if (isset($_POST['submitLogin'])) {
+    //si $_POST['mailLogin'] existe
     if (isset($_POST['mailLogin'])) {
+        //si $_POST['mailLogin'] n'est pas vide
         if (!empty($_POST['mailLogin'])) {
+            //emploi de la fonction PHP filter_var pour valider l'adresse mail
             if (filter_var($_POST['mailLogin'], FILTER_VALIDATE_EMAIL)) {
                 $mailLogin = htmlspecialchars($_POST['mailLogin']);
             } else {
@@ -24,15 +29,17 @@ if (isset($_POST['submitLogin'])) {
             $formError['passwordLogin'] = 'Erreur, veuillez remplir le champ.';
         }
     }
-   
+    
+    //si aucune erreur n'a été comptabilisé
     if (count($formError) == 0) {
         $users->mail = $mailLogin;
         $hash = $users->getUserHash();
+        //is_object détermine si une variable est de type objet
         if (is_object($hash)) {
+            //emploi de la fonction password_verify qui vérifie qu'un mot de passe correspond à un hachage
             $isConnect = password_verify($passwordLogin, $hash->password);
             if ($isConnect) {
                 $userInfo = $users->getUserInfo();
-                session_start();
                 $_SESSION['mail'] = $userInfo->mail;
                 $_SESSION['username'] = $userInfo->username;
                 $_SESSION['password'] = $userInfo->password;

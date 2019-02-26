@@ -1,6 +1,17 @@
 <?php
 
 $games = new games();
+
+$isDelete = FALSE;
+if (!empty($_GET['idDelete'])) {
+    $games->id = htmlspecialchars($_GET['idDelete']);
+    if ($games->deleteGame()) {
+        $isDelete = TRUE;
+        header('Location:gamesList.php');
+        exit();
+    }
+}
+
 if (!empty($_GET['id'])) {
     $games->id = htmlspecialchars($_GET['id']);
     $gameDetail = $games->gameDetail();

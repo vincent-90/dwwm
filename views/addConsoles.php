@@ -21,30 +21,37 @@ include 'header.php';
             <p class="text-danger"><?= isset($formError['checkConsole']) ? $formError['checkConsole'] : '' ?></p>
                     <div class="form-group">
                         <div class="form-row">             
-                            <label for="name" class="col-sm-4 col-form-label">Nom de la console :</label>
-                            <div class="col-sm-8">
+                            <label for="name" class="col-sm-3 col-form-label">Nom de la console :</label>
+                            <div class="col-sm-9">
                                 <input name="name" type="text" class="form-control" id="name" placeholder="Nom de la console" value="<?= isset($name) ? $name : '' ?>"/>
                                 <p class="text-danger"><?= isset($formError['name']) ? $formError['name'] : '' ?></p>
                             </div>
                         </div>
                         <div class="form-row">             
-                            <label for="summary" class="col-sm-4 col-form-label">Description :</label>
-                            <div class="col-sm-8">
+                            <label for="summary" class="col-sm-3 col-form-label">Description :</label>
+                            <div class="col-sm-9">
                                 <textarea name="summary" type="text" class="form-control" id="summary" placeholder="Description" value="<?= isset($summary) ? $summary : '' ?>"></textarea>
                                 <p class="text-danger"><?= isset($formError['summary']) ? $formError['summary'] : '' ?></p>
                             </div>
                         </div>
                         <div class="form-row">             
-                            <label for="date" class="col-sm-4 col-form-label">Date de sortie (France) :</label>
-                            <div class="col-sm-8">
+                            <label for="date" class="col-sm-3 col-form-label">Date de sortie :</label>
+                            <div class="col-sm-9">
                                 <input name="date" type="date" class="form-control" id="date" value="<?= isset($date) ? $date : '' ?>"/>
                                 <p class="text-danger"><?= isset($formError['date']) ? $formError['date'] : '' ?></p>
                             </div>
                         </div>
-                        <div class="form-row">             
-                            <label for="image" class="col-sm-offset-2 col-sm-4 col-form-label">Photo :</label>
-                            <div class="col-sm-offset-2 col-sm-4">
-                                <input name="image" type="file" id="image" placeholder="Photo de la console"/>
+                        <div class="form-row justify-content-end">   
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Photo</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <label class="custom-file-label" for="image"></label>
+                                        <input name="image" type="file" class="custom-file-input" id="image"/>
+                                    </div>
+                                </div>
                                 <p class="text-danger"><?= isset($formError['image']) ? $formError['image'] : '' ?></p>
                             </div>
                         </div>

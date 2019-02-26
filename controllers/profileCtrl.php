@@ -17,13 +17,19 @@ $formError = array();
 $isSuccess = FALSE;
 $isError = FALSE;
 
+//si le submit existe
 if (isset($_POST['submit'])) {
+    //si $_POST['username'] existe
     if (isset($_POST['username'])) {
+        //si $_POST['username'] n'est pas vide
         if (!empty($_POST['username'])) {
+            //on vérifie que la longueur du pseudo est inférieur à 30 caractères
             $usernameLength = strlen($_POST['username']);
             if ($usernameLength <= 30) {
+                //on vérifie si $_POST['username'] respecte la regex
                 if (preg_match($usernameRegex, $_POST['username'])) {
                     $username = htmlspecialchars($_POST['username']);
+                    //sinon on stock un message dans le tableau formError
                 } else {
                     $formError['username'] = 'Erreur, saisie invalide.';
                 }
@@ -34,7 +40,9 @@ if (isset($_POST['submit'])) {
             $formError['username'] = 'Erreur, veuillez remplir le champ.';
         }
     }
+    //si $_POST['mail'] existe
     if (isset($_POST['mail'])) {
+        //si $_POST['mail'] n'est pas vide
         if (!empty($_POST['mail'])) {
             //emploi de la fonction PHP filter_var pour valider l'adresse mail
             if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
@@ -57,11 +65,18 @@ if (isset($_POST['submit'])) {
             $formError['mailConfirm'] = 'Erreur, veuillez remplir le champ.';
         }
     }
+    //on vérifie que les variables $mail et $mailConfirm existent
     if (isset($mail) && isset($mailConfirm)) {
+        //si elles sont identiques
         if ($mail == $mailConfirm) {
+            //on vérifie $_POST['password'] n'est pas vide
             if (!empty($_POST['password'])) {
+                //on vérifie $_POST['passwordConfirm'] n'est pas vide
                 if (!empty($_POST['passwordConfirm'])) {
+                    //si ils sont identiques
                     if ($_POST['password'] == $_POST['passwordConfirm']) {
+                        //emploi de la fonction password_hash pour créer une clé de hashage du mot de passe
+                        //le résultat de PASSWORD_BCRYPT sera toujours une chaîne de 60 caractères
                         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                         $accountMessage = 'Félicitations, le compte a bien été modifié.';
                     } else {
@@ -80,7 +95,7 @@ if (isset($_POST['submit'])) {
         $accountMessage = 'Désolé, le compte n\'a pu être modifié.';
     }
 
-
+    //si aucune erreur n'a été comptabilisé
     if (count($formError) == 0) {
         $users->id = $_GET['id'];
         $users->username = $username;
@@ -132,7 +147,7 @@ if (isset($_POST['submitAvatar'])) {
     } else {
         $formError['avatar'] = "Erreur, veuillez sélectionner un fichier.";
     }
-
+    //si aucune erreur n'a été comptabilisé
     if (count($formError) == 0) {
         $users->id = $_GET['id'];
         $users->avatar = $image;

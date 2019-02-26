@@ -111,25 +111,20 @@ include 'header.php';
                                                 <legend><strong>Modifier photo de profil</strong></legend>
                                                 <p class="text-success"><?= isset($avatarMessage) ? $avatarMessage : '' ?></p>
                                                 <p class="text-danger"><?= isset($formError['avatar']) ? $formError['avatar'] : '' ?></p>
-
                                                 <div class="form-group">
-                                                    <div class="form-row">             
-                                                        <label for="avatar" class="col-sm-3 col-form-label">Avatar :</label>
-                                                        <div class="col-sm-9">
-                                                            <input name="avatar" type="file" id="avatar"/>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="input-group">
+                                                    <div class="form-row">   
+                                                        <div class="col-sm-12">
+                                                        <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">Avatar</span>
                                                         </div>
                                                         <div class="custom-file">
-                                                            <label class="custom-file-label" for="avatar">Choisir une image</label>
+                                                            <label class="custom-file-label" for="avatar"></label>
                                                             <input name="avatar" type="file" class="custom-file-input" id="avatar"/>
                                                         </div>
+                                                        </div>
                                                     </div>
-
+                                                    </div>
                                                     <div class="form-row">
                                                         <div class="col-sm-12">
                                                             <input type="submit" value="Changer d'avatar" name="submitAvatar" class="btn btn-light-green"/>
