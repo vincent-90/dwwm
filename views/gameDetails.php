@@ -36,9 +36,9 @@ include 'header.php';
                 <div>Le jeu n'a pas été trouvé !</div>
             <?php } ?>
             <?php if (isset($_SESSION['isConnect'])) { ?>
-                <h2 class="title">Modifications</h2>
                 <div class="row">
                     <div class="col-md-12">
+                        <h2 class="title">Modifications</h2>
                         <div class="row">
                             <div class="col-md-7">
                                 <form method="POST" action="gameDetails.php?id=<?= $games->id ?>">
@@ -125,7 +125,7 @@ include 'header.php';
                                             </fieldset>
                                         </form>
                                     </div>
-                                    <?php if ($_SESSION['id_dwwm_grades'] == 1) { ?>
+                                    <?php if ($_SESSION['id_dwwm_grades'] == 57) { ?>
                                         <div class="col-md-12">
                                             <h2 class="title">Suppression</h2>
                                             <div class="form">

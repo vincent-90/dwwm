@@ -34,9 +34,9 @@ include 'header.php';
                 <div>La console n'a pas été trouvée !</div>
             <?php } ?>
             <?php if (isset($_SESSION['isConnect'])) { ?>
-                <h2 class="title">Modifications</h2>
                 <div class="row">
                     <div class="col-md-12">
+                        <h2 class="title">Modifications</h2>
                         <div class="row">
                             <div class="col-md-7">
                                 <form method="POST" action="consoleDetails.php?id=<?= $consoles->id ?>">
@@ -112,7 +112,7 @@ include 'header.php';
                                             </fieldset>
                                         </form>
                                     </div>
-                                    <?php if ($_SESSION['id_dwwm_grades'] == 1) { ?>
+                                    <?php if ($_SESSION['id_dwwm_grades'] == 57) { ?>
                                         <div class="col-md-12">
                                             <h2 class="title">Suppression</h2>
                                             <div class="form">
@@ -127,6 +127,44 @@ include 'header.php';
                     </div>
                 </div>
             <?php } ?>
+
+            <!--liste des commentaires accessible à tous-->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title">Commentaires</h3>
+
+                    <!--ajouter un commentaire, utilisateur inscrit-->
+                    <?php if (isset($_SESSION['isConnect'])) { ?>
+
+                        <form method="POST" action="consoleDetails.php?id=<?= $consoles->id ?>">
+                            <fieldset class="form">
+                                <legend><strong>Ajouter un commentaire</strong></legend>
+                                <?php if ($isSuccess) { ?>
+                                            <p class="text-success">Votre commentaire a bien été envoyer.</p>
+                                            <?php
+                                        }
+                                        if ($isError) {
+                                            ?>
+                                            <p class="text-danger">Erreur, envoi impossible.</p>
+                                        <?php } ?>
+                                <div class="form-group">
+                                    <div class="form-row"> 
+                                        <div class="col-md-10">
+                                            <textarea name="text" type="text" class="form-control" id="text" placeholder="Ecrire un commentaire"></textarea>
+                                            <p class="text-danger"><?= isset($formError['text']) ? $formError['text'] : '' ?></p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="submit" value="Envoyer" name="submitComment" class="btn btn-light-green"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                    <?php } ?>
+                </div>
+            </div>
+
             <a href="consolesList.php" class="btn btn-lg btn-dark-green">Retour à la liste des consoles.</a>
         </div>
     </div>

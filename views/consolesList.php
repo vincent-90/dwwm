@@ -26,7 +26,7 @@ include 'header.php';
                             <th scope="col">Nom</th>
                             <th scope="col">Sortie</th>
                             <th scope="col">Détail</th>
-                            <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
+                            <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 57) { ?>
                             <th scope="col">Effacer</th>
                             <?php } ?>
                         </tr>
@@ -38,7 +38,7 @@ include 'header.php';
                                 <td><?= $console->name; ?></td>
                                 <td><?= $console->date; ?></td>
                                 <td><a class="btn btn-lime" href="consoleDetails.php?id=<?= $console->id; ?>">Détails</a></td>
-                                <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
+                                <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 57) { ?>
                                 <td><a class="btn btn-danger" href="consolesList.php?idDelete=<?= $console->id ?>">Effacer</a></td>
                                 <?php } ?>
                             </tr>

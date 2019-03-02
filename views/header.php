@@ -38,7 +38,7 @@ include '../controllers/headerCtrl.php';
                                     <a class="dropdown-item" href="addGames.php">Ajouter un jeu</a>
                                 </div>
                             </li>
-                            <?php if ($_SESSION['id_dwwm_grades'] == 1) { ?>
+                            <?php if ($_SESSION['id_dwwm_grades'] == 57) { ?>
                                 <li class="nav-item">
                                     <a class="nav-link hoverable" href="usersList.php">Liste des membres</a>
                                 </li>

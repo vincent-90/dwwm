@@ -111,3 +111,31 @@ if (isset($_POST['submitImage'])) {
         }
     }
 }
+
+$comments = new comments();
+
+if (isset($_POST['submitComment'])) {
+    if (isset($_POST['text'])) {
+        if (!empty($_POST['text'])) {
+            $text = htmlspecialchars($_POST['text']);
+        } else {
+            $formError['text'] = 'Erreur, veuillez remplir le champ.';
+        }
+    }
+    
+    if (count($formError) == 0) {
+        $comments->text = $text;
+        $comments->id_dwwm_users = $_SESSION['id'];
+        //$comments->id_dwwm_consoles = $consoles->id;
+        $comments->id_dwwm_consoles = $_GET['id'];
+        $comments->id_dwwm_games = 0;
+        $comments->dateHour = date('Y-m-d H:i:s');
+        
+        $comments->addComments();
+        if ($comments->addComments()) {
+            $isSuccess = TRUE;
+        } else {
+            $isError = TRUE;
+        }
+    }
+}

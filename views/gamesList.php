@@ -27,7 +27,7 @@ include 'header.php';
                             <th scope="col">Titre</th>
                             <th scope="col">Sortie</th>
                             <th scope="col">Détail</th>
-                            <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
+                            <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 57) { ?>
                             <th scope="col">Effacer</th>
                             <?php } ?>
                         </tr>
@@ -40,7 +40,7 @@ include 'header.php';
                                 <td><?= $game->title; ?></td>
                                 <td><?= $game->date; ?></td>
                                 <td><a class="btn btn-lime" href="gameDetails.php?id=<?= $game->id; ?>">Détails</a></td>
-                      <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 1) { ?>
+                      <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 57) { ?>
                                 <td><a class="btn btn-danger" href="gamesList.php?idDelete=<?= $game->id ?>">Effacer</a></td>
                                 <?php } ?>
                             </tr>

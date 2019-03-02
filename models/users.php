@@ -16,7 +16,7 @@ class users extends database {
     //méthode permettant d'enregistrer un utilisateur dans la base de données.
     public function addUser() {
         $query = 'INSERT INTO `dwwm_users` (`username`, `mail`, `password`, `avatar`, `id_dwwm_grades`)'
-                . ' VALUES (:username, :mail, :password, :avatar, 2)';
+                . ' VALUES (:username, :mail, :password, :avatar, 58)';
         $queryResult = $this->db->prepare($query);
         $queryResult->bindValue(':username', $this->username, PDO::PARAM_STR);
         $queryResult->bindValue(':mail', $this->mail, PDO::PARAM_STR);

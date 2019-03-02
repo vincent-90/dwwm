@@ -15,11 +15,7 @@ include 'header.php';
         </div>
         <div class="col-md-6">
             <div class="window text-center">
-                <div><img src="../assets/img/Logo1.png" width="350" class="img-fluid"/></div>
-                <div>
-                    <a href="register.php" class="btn btn-light-green">Inscription</a>
-                    <a href="login.php" class="btn btn-dark-green">Connexion</a>
-                </div>
+                <div><img src="../assets/img/Logo1.png" width="450" class="img-fluid"/></div>
             </div>
         </div>
     </div>

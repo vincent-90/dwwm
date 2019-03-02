@@ -1,7 +1,13 @@
 <?php
-
+//instanciation de l'objet consoles. 
+//$consoles devient une instance de la classe consoles.
+//la méthode magique construct est appelée automatiquement grâce au mot clé new.
 $consoles = new consoles();
 $consolesList = $consoles->getConsolesList();
+
+//instanciation de l'objet games. 
+//$games devient une instance de la classe games.
+//la méthode magique construct est appelée automatiquement grâce au mot clé new.
 $games = new games();
 
 //déclaration des regex :
@@ -11,11 +17,16 @@ $formError = array();
 $isSuccess = FALSE;
 $isError = FALSE;
 
+//si le submit existe
 if (isset($_POST['submitGame'])) {
+    //si $_POST['title'] existe
     if (isset($_POST['title'])) {
+        //si $_POST['title'] n'est pas vide
         if (!empty($_POST['title'])) {
+            //htmlspecialchars convertit les caractères spéciaux
             $title = htmlspecialchars($_POST['title']);
         } else {
+            //sinon on stock un message dans le tableau formError
             $formError['title'] = 'Erreur, veuillez remplir le champ.';
         }
     }
@@ -28,6 +39,7 @@ if (isset($_POST['submitGame'])) {
     }
     if (isset($_POST['date'])) {
         if (!empty($_POST['date'])) {
+            //on vérifie si $_POST['date'] respecte la regex
             if (preg_match($dateRegex, $_POST['date'])) {
                 $date = htmlspecialchars($_POST['date']);
             } else {
@@ -78,6 +90,7 @@ if (isset($_POST['submitGame'])) {
         }
     }
 
+    //si aucune erreur n'a été comptabilisé
     if (count($formError) == 0) {
         $games->title = $title;
         $games->summary = $summary;
@@ -85,6 +98,7 @@ if (isset($_POST['submitGame'])) {
         $games->image = $image;
         $games->id_dwwm_consoles = $idConsole;
         $games->id_dwwm_users = $_SESSION['id'];
+        //on vérifie que le jeu n'est pas déjà présent dans la db
         $checkGame = $games->checkFreeGame();
         if ($checkGame === '1') {
             $formError['checkGame'] = 'Ce jeu est déjà enregistré.';
