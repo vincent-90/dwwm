@@ -13,10 +13,11 @@ class comments extends database {
     public function __construct() {
         parent::__construct();
     }
-    
+
     //méthode permettant d'ajouter un commentaire dans la base de données.
     public function addComments() {
-        $query = 'INSERT INTO `dwwm_comments` (`text`, `dateHour`, `id_dwwm_users`, `id_dwwm_games`, `id_dwwm_consoles`, `id_dwwm_status`) '
+        $query = 'INSERT INTO `dwwm_comments` (`text`, `dateHour`, '
+                . '`id_dwwm_users`, `id_dwwm_games`, `id_dwwm_consoles`, `id_dwwm_status`) '
                 . 'VALUES (:text, :dateHour, :id_dwwm_users, :id_dwwm_games, :id_dwwm_consoles, 1)';
         $queryResult = $this->db->prepare($query);
         $queryResult->bindValue(':text', $this->text, PDO::PARAM_STR);
@@ -26,5 +27,89 @@ class comments extends database {
         $queryResult->bindValue(':id_dwwm_consoles', $this->id_dwwm_consoles, PDO::PARAM_INT);
         return $queryResult->execute();
     }
+
+    //méthode permettant d'afficher les commentaires d'après l'id d'une console.
+    public function getCommentsByConsole() {
+        $result = array();
+        $query = 'SELECT `dwwm_users`.`username`, `dwwm_users`.`avatar`, '
+                . '`dwwm_comments`.`id_dwwm_users`, '
+                . '`dwwm_comments`.`id`, `dwwm_comments`.`text`, `dwwm_comments`.`id_dwwm_consoles`, '
+                . 'DATE_FORMAT(`dwwm_comments`.`dateHour`, "%d-%b-%Y") AS `date`, '
+                . 'DATE_FORMAT(`dwwm_comments`.`dateHour`, "%H:%i") AS `hour` '
+                . 'FROM `dwwm_comments` INNER JOIN `dwwm_users` '
+                . 'ON `dwwm_comments`.`id_dwwm_users` = `dwwm_users`.`id` '
+                . 'WHERE `dwwm_comments`.`id_dwwm_consoles` = :id_dwwm_consoles';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':id_dwwm_consoles', $this->id_dwwm_consoles, PDO::PARAM_INT);
+        if ($queryResult->execute()) {
+            $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
+        }
+        return $result;
+    }
     
+        //méthode permettant d'afficher les commentaires d'après l'id d'un jeu.
+    public function getCommentsByGame() {
+        $result = array();
+        $query = 'SELECT `dwwm_users`.`username`, `dwwm_users`.`avatar`, '
+                . '`dwwm_comments`.`id_dwwm_users`, '
+                . '`dwwm_comments`.`id`, `dwwm_comments`.`text`, `dwwm_comments`.`id_dwwm_consoles`, '
+                . 'DATE_FORMAT(`dwwm_comments`.`dateHour`, "%d-%b-%Y") AS `date`, '
+                . 'DATE_FORMAT(`dwwm_comments`.`dateHour`, "%H:%i") AS `hour` '
+                . 'FROM `dwwm_comments` INNER JOIN `dwwm_users` '
+                . 'ON `dwwm_comments`.`id_dwwm_users` = `dwwm_users`.`id` '
+                . 'WHERE `dwwm_comments`.`id_dwwm_games` = :id_dwwm_games';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':id_dwwm_games', $this->id_dwwm_games, PDO::PARAM_INT);
+        if ($queryResult->execute()) {
+            $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
+        }
+        return $result;
+    }
+
+    //méthode permettant d'afficher le détails d'un commentaire d'après son id.
+    public function getCommentById() {
+        $return = FALSE;
+        $isOk = FALSE;
+        $query = 'SELECT DATE_FORMAT(`dwwm_comments`.`dateHour`, "%d-%b-%Y") AS `date`, '
+                . 'DATE_FORMAT(`dwwm_comments`.`dateHour`, "%H:%i") AS `hour`, '
+                . '`dwwm_comments`.`id`, `dwwm_comments`.`text`, `dwwm_comments`.`id_dwwm_users` '
+                . 'FROM `dwwm_comments` '
+                . 'WHERE `dwwm_comments`.`id` = :id';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        //si la requête est bien executé, on rempli $return (array) avec un objet
+        if ($queryResult->execute()) {
+            $return = $queryResult->fetch(PDO::FETCH_OBJ);
+        }
+        //si $return est un objet alors on hydrate
+        if (is_object($return)) {
+            $this->date = $return->date;
+            $this->hour = $return->hour;
+            $this->text = $return->text;
+            $this->id = $return->id;
+            $this->id = $return->id_dwwm_users;
+            $isOk = TRUE;
+        }
+        return $isOk;
+    }
+
+    //méthode permettant de modifier un commentaire.
+    public function updateComment() {
+        $query = 'UPDATE `dwwm_comments` SET `text`= :text, `dateHour`= :dateHour WHERE `dwwm_comments`.`id`= :id';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':text', $this->text, PDO::PARAM_STR);
+        $queryResult->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryResult->execute();
+    }
+
+    //méthode permettant la suppression d'un commentaire.
+    public function deleteComment() {
+        $query = 'DELETE FROM `dwwm_comment` WHERE `id` = :id LIMIT 1';
+        $queryResult = $this->db->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $result = $queryResult->execute();
+        return $result;
+    }
+
 }

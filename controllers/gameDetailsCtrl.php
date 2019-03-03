@@ -123,3 +123,35 @@ if (isset($_POST['submitImage'])) {
         }
     }
 }
+
+$comments = new comments();
+
+$comments->id_dwwm_games = $games->id;
+$isComment = $comments->getCommentsByGame();
+
+$dateHour = date('Y-m-d H:i:s');
+
+if (isset($_POST['submitComment'])) {
+    if (isset($_POST['text'])) {
+        if (!empty($_POST['text'])) {
+            $text = htmlspecialchars($_POST['text']);
+        } else {
+            $formError['text'] = 'Erreur, veuillez remplir le champ.';
+        }
+    }
+    
+    if (count($formError) == 0) {
+        $comments->text = $text;
+        $comments->id_dwwm_users = $_SESSION['id'];
+        $comments->id_dwwm_consoles = NULL;
+        $comments->id_dwwm_games = $_GET['id'];
+        $comments->dateHour = $dateHour;
+        if ($comments->addComments()) {
+            $isSuccess = TRUE;
+            header('Location:gameDetails.php?id=' . $games->id);
+            exit();
+        } else {
+            $isError = TRUE;
+        }
+    }
+}

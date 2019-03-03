@@ -26,7 +26,6 @@ include 'header.php';
                             <th scope="col">Pseudo</th>
                             <th scope="col">Adresse mail</th>
                             <th scope="col">Supprimer</th>
-                            <th scope="col">Supprimer modal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +34,10 @@ include 'header.php';
                                 <td><img src="../uploads/avatars/<?= $user->avatar ?>" width="150" class="img-fluid"/></td>
                                 <td><?= $user->username ?></td>
                                 <td><?= $user->mail ?></td>
-                                <td><a class="btn btn-amber" href="usersList.php?idDelete=<?= $user->id ?>">Supprimer</a></td>
+                                <td>
+                                    <div><a class="btn btn-danger" href="usersList.php?idDelete=<?= $user->id ?>">Supprimer</a></div>
+                                    <div>Attention, cette action est irréversible.</div>
+                                </td>
                             </tr>
                         <?php } ?>                 
                     </tbody>

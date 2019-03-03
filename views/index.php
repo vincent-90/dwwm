@@ -5,7 +5,7 @@ include 'header.php';
 <div class="container-fluid wall">
     <div class="row">
         <div class="col-md-6">
-            <div class="window">
+            <div class="openWindow">
                 <h1>Bienvenue</h1>
                 <hr/>
                 <div>
@@ -14,8 +14,8 @@ include 'header.php';
             </div>
         </div>
         <div class="col-md-6">
-            <div class="window text-center">
-                <div><img src="../assets/img/Logo1.png" width="450" class="img-fluid"/></div>
+            <div class="openWindow text-center">
+                <div><img src="../assets/img/Logo1.png" width="450" class="img-fluid" alt="logo"/></div>
             </div>
         </div>
     </div>

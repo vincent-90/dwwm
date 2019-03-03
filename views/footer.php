@@ -31,10 +31,14 @@
     <!-- Copyright -->
 
 </footer>
+<div id="btn_up">
+    <img alt="Retour en haut" title="Retour en haut" src="../assets/img/triangle.png" height="60"/>
+</div>
 <script type="text/javascript" src="../assets/MDB-Free_4.6.1/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../assets/MDB-Free_4.6.1/js/popper.min.js"></script>
 <script type="text/javascript" src="../assets/MDB-Free_4.6.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../assets/MDB-Free_4.6.1/js/mdb.min.js"></script>
+<script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 </html>
 

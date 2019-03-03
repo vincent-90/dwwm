@@ -8,7 +8,7 @@ include 'header.php';
         <div class="text-center col-12">
             <h1 class="title">Inscription</h1>
             <form method="POST" action="">
-                <fieldset class="form">
+                <fieldset class="window">
                     <legend><strong>Créer un compte</strong></legend>
                     <?php if ($isSuccess) { ?>
                         <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>

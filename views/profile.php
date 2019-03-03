@@ -39,13 +39,13 @@ include 'header.php';
                         </tbody>
                     </table>
                 </div>
-                <h2 class="title">Modifications</h2>
+                <h2 class="subtitle">Modifications</h2>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <form method="POST" action="">
-                                    <fieldset class="form">
+                                    <fieldset class="window">
                                         <legend><strong>Modifier profil</strong></legend>
                                         <?php if ($isSuccess) { ?>
                                             <p class="text-success"><?= isset($accountMessage) ? $accountMessage : '' ?></p>
@@ -107,7 +107,7 @@ include 'header.php';
                                 <div class="row">
                                     <div class="col-md-12">
                                         <form method="POST" action="" enctype="multipart/form-data">
-                                            <fieldset class="form">
+                                            <fieldset class="window">
                                                 <legend><strong>Modifier photo de profil</strong></legend>
                                                 <p class="text-success"><?= isset($avatarMessage) ? $avatarMessage : '' ?></p>
                                                 <p class="text-danger"><?= isset($formError['avatar']) ? $formError['avatar'] : '' ?></p>
@@ -135,11 +135,11 @@ include 'header.php';
                                         </form>
                                     </div>
                                     <div class="col-md-12">
-                                        <h2 class="title">Suppression</h2>
-                                        <div class="form">
+                                        <h2 class="subtitle">Suppression</h2>
+                                        <div class="window">
                                             <div>Cliquez sur le bouton "<strong>effacer</strong>" pour supprimer votre compte.</div>
                                             <div>Attention, cette action est irréversible.</div>
-                                            <a class="btn btn-amber" href="profile.php?idDelete=<?= $_SESSION['id'] ?>">Effacer</a> 
+                                            <a class="btn btn-danger" href="profile.php?idDelete=<?= $_SESSION['id'] ?>">Effacer</a> 
                                         </div>
                                     </div>
                                 </div>

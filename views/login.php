@@ -8,7 +8,7 @@ include 'header.php';
         <div class="text-center col-12">
             <h1 class="title">Connexion</h1>
             <form method="POST" action="">
-                <fieldset class="form">
+                <fieldset class="window">
                     <legend><strong>Accéder à mon compte</strong></legend>
                     <div class="form-group">
                         <div class="form-row">             

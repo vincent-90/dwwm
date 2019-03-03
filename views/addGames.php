@@ -8,7 +8,7 @@ include 'header.php';
         <div class="text-center col-12">
             <h1 class="title">Ajouter un jeu</h1>
             <form method="POST" action="" enctype="multipart/form-data">
-                <fieldset class="form">
+                <fieldset class="window">
                     <legend><strong>Proposer un jeu</strong></legend>
                     <?php if ($isSuccess) { ?>
                         <p class="text-success">Enregistrement effectué !</p>

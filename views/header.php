@@ -14,7 +14,7 @@ include '../controllers/headerCtrl.php';
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark elegant-color">
-                <a class="navbar-brand" href="index.php"><img src="../assets/img/Logo1.png" width="150"/></a>
+                <a class="navbar-brand" href="index.php"><img src="../assets/img/Logo1.png" width="150" alt="logo"/></a>
                 <button class="navbar-toggler special-color-dark hoverable" type="button" data-toggle="collapse" data-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>

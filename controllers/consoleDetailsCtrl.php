@@ -114,6 +114,11 @@ if (isset($_POST['submitImage'])) {
 
 $comments = new comments();
 
+$comments->id_dwwm_consoles = $consoles->id;
+$isComment = $comments->getCommentsByConsole();
+
+$dateHour = date('Y-m-d H:i:s');
+
 if (isset($_POST['submitComment'])) {
     if (isset($_POST['text'])) {
         if (!empty($_POST['text'])) {
@@ -122,18 +127,17 @@ if (isset($_POST['submitComment'])) {
             $formError['text'] = 'Erreur, veuillez remplir le champ.';
         }
     }
-    
+
     if (count($formError) == 0) {
         $comments->text = $text;
         $comments->id_dwwm_users = $_SESSION['id'];
-        //$comments->id_dwwm_consoles = $consoles->id;
         $comments->id_dwwm_consoles = $_GET['id'];
-        $comments->id_dwwm_games = 0;
-        $comments->dateHour = date('Y-m-d H:i:s');
-        
-        $comments->addComments();
+        $comments->id_dwwm_games = NULL;
+        $comments->dateHour = $dateHour;
         if ($comments->addComments()) {
             $isSuccess = TRUE;
+            header('Location:consoleDetails.php?id=' . $consoles->id);
+            exit();
         } else {
             $isError = TRUE;
         }

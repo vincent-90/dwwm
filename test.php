@@ -24,3 +24,29 @@
         </div>
     </div>
 </td>
+
+.modal-title {
+    color: blue;
+}
+.modal-body {
+    color: blue;
+}
+
+---------------------------------
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"><?= $comment->username; ?></th>
+                <th scope="col"><?= $comment->date; ?><?= $comment->hour; ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="../uploads/avatars/<?= $comment->avatar; ?>" width="150" class="img-fluid"/></td>
+                <td><?= $comment->text; ?></td>
+            </tr>          
+        </tbody>
+    </table>
+</div>
