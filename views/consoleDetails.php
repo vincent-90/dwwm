@@ -19,7 +19,7 @@ include 'header.php';
                     <?php if ($consoleDetail) { ?>
                         <tbody>
                             <tr>
-                                <td><img src="../uploads/consoles/<?= $consoles->image; ?>" width="250" class="img-fluid"/></td>
+                                <td><img src="../uploads/consoles/<?= $consoles->image; ?>" width="250" class="img-fluid" alt="console"/></td>
                                 <td><?= $consoles->name ?></td>
                                 <td><?= $consoles->date ?></td>
                             </tr>
@@ -39,7 +39,7 @@ include 'header.php';
                         <h2 class="subtitle">Modifications</h2>
                         <div class="row">
                             <div class="col-md-7">
-                                <form method="POST" action="consoleDetails.php?id=<?= $consoles->id ?>">
+                                <form method="POST" action="">
                                     <fieldset class="window">
                                         <legend><strong>Modifier les informations</strong></legend>
                                         <?php if ($isSuccess) { ?>
@@ -61,7 +61,7 @@ include 'header.php';
                                             <div class="form-row">             
                                                 <label for="summary" class="col-sm-4 col-form-label">Description :</label>
                                                 <div class="col-sm-8">
-                                                    <textarea name="summary" type="text" class="form-control" id="summary" placeholder="<?= $consoles->summary; ?>"></textarea>
+                                                    <textarea name="summary" class="form-control" id="summary" placeholder="<?= $consoles->summary; ?>"></textarea>
                                                     <p class="text-danger"><?= isset($formError['summary']) ? $formError['summary'] : '' ?></p>
                                                 </div>
                                             </div>
@@ -141,15 +141,11 @@ include 'header.php';
                                 <div class="row">
                                     <div class="col-sm-2 comment">
                                         <div><?= $comment->username; ?></div>
-                                        <div><img src="../uploads/avatars/<?= $comment->avatar; ?>" width="150" class="img-fluid"/></div>
+                                        <div><img src="../uploads/avatars/<?= $comment->avatar; ?>" width="150" class="img-fluid" alt="avatar"/></div>
                                     </div>
                                     <div class="col-sm-10 comment">
-                                        <div class="comment"><?= $comment->date; ?><?= $comment->hour; ?></div>
+                                        <div class="comment"><?= $comment->date; ?> - <?= $comment->hour; ?></div>
                                         <div><?= $comment->text; ?></div>
-                                        <!--modifier un commentaire-->
-                                        <?php if (isset($_SESSION['isConnect']) && $_SESSION['id'] == $comment->id_dwwm_users) { ?>
-                                            <div><a class="btn btn-lime" href="commentDetails.php?id=<?= $comment->id; ?>">Editer</a></div>
-                                        <?php } ?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -158,21 +154,21 @@ include 'header.php';
                         <?php } ?>
                         <!--ajouter un commentaire, utilisateur inscrit-->
                         <?php if (isset($_SESSION['isConnect'])) { ?>
-                            <form method="POST" action="">
+                        <form method="POST" action="">
                                 <fieldset class="window">
                                     <legend><strong>Ajouter un commentaire</strong></legend>
-                                    <?php if ($isSuccess) { ?>
+                                    <?php if ($commentSuccess) { ?>
                                         <p class="text-success">Votre commentaire a bien été envoyé.</p>
                                         <?php
                                     }
-                                    if ($isError) {
+                                    if ($commentError) {
                                         ?>
                                         <p class="text-danger">Erreur, envoi impossible.</p>
                                     <?php } ?>
                                     <div class="form-group">
                                         <div class="form-row"> 
                                             <div class="col-md-10">
-                                                <textarea name="text" type="text" class="form-control" id="text" placeholder="Ecrire un commentaire"></textarea>
+                                                <textarea name="text" class="form-control" id="text" placeholder="Ecrire un commentaire"></textarea>
                                                 <p class="text-danger"><?= isset($formError['text']) ? $formError['text'] : '' ?></p>
                                             </div>
                                             <div class="col-md-2">

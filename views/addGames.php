@@ -7,7 +7,7 @@ include 'header.php';
     <div class="row">
         <div class="text-center col-12">
             <h1 class="title">Ajouter un jeu</h1>
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="addGames.php" enctype="multipart/form-data">
                 <fieldset class="window">
                     <legend><strong>Proposer un jeu</strong></legend>
                     <?php if ($isSuccess) { ?>
@@ -30,7 +30,7 @@ include 'header.php';
                         <div class="form-row">             
                             <label for="summary" class="col-sm-3 col-form-label">Description :</label>
                             <div class="col-sm-9">
-                                <textarea name="summary" type="text" class="form-control" id="summary" placeholder="Résumé du jeu" value="<?= isset($summary) ? $summary : '' ?>"></textarea>
+                                <textarea name="summary" class="form-control" id="summary" placeholder="Résumé du jeu"></textarea>
                                 <p class="text-danger"><?= isset($formError['summary']) ? $formError['summary'] : '' ?></p>
                             </div>
                         </div>

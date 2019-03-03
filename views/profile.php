@@ -32,7 +32,7 @@ include 'header.php';
                         </thead>
                         <tbody>
                             <tr>
-                                <td><img src="../uploads/avatars/<?= $_SESSION['avatar']; ?>" width="150" class="img-fluid"/></td>
+                                <td><img src="../uploads/avatars/<?= $_SESSION['avatar']; ?>" width="150" class="img-fluid" alt="avatar"/></td>
                                 <td><?= $_SESSION['username']; ?></td>
                                 <td><?= $_SESSION['mail']; ?></td>
                             </tr>
@@ -44,7 +44,7 @@ include 'header.php';
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <form method="POST" action="">
+                                <form method="POST" action="profile.php">
                                     <fieldset class="window">
                                         <legend><strong>Modifier profil</strong></legend>
                                         <?php if ($isSuccess) { ?>
@@ -74,7 +74,7 @@ include 'header.php';
                                             <div class="form-row">             
                                                 <label for="mailConfirm" class="col-sm-4 col-form-label">Confirmer mail :</label>
                                                 <div class="col-sm-8">
-                                                    <input name="mailConfirm" type="email" class="form-control" id="mail" placeholder="E-mail de confirmation" value="<?= isset($mailConfirm) ? $mailConfirm : '' ?>"/>
+                                                    <input name="mailConfirm" type="email" class="form-control" id="mailConfirm" placeholder="E-mail de confirmation" value="<?= isset($mailConfirm) ? $mailConfirm : '' ?>"/>
                                                     <p class="text-danger"><?= isset($formError['mailConfirm']) ? $formError['mailConfirm'] : '' ?></p>
                                                 </div>
                                             </div>
@@ -106,7 +106,7 @@ include 'header.php';
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form method="POST" action="" enctype="multipart/form-data">
+                                        <form method="POST" action="profile.php" enctype="multipart/form-data">
                                             <fieldset class="window">
                                                 <legend><strong>Modifier photo de profil</strong></legend>
                                                 <p class="text-success"><?= isset($avatarMessage) ? $avatarMessage : '' ?></p>

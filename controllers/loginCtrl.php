@@ -29,7 +29,6 @@ if (isset($_POST['submitLogin'])) {
             $formError['passwordLogin'] = 'Erreur, veuillez remplir le champ.';
         }
     }
-    
     //si aucune erreur n'a été comptabilisé
     if (count($formError) == 0) {
         $users->mail = $mailLogin;

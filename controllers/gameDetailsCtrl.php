@@ -129,6 +129,8 @@ $comments = new comments();
 $comments->id_dwwm_games = $games->id;
 $isComment = $comments->getCommentsByGame();
 
+$commentSuccess = FALSE;
+$commentError = FALSE;
 $dateHour = date('Y-m-d H:i:s');
 
 if (isset($_POST['submitComment'])) {
@@ -147,11 +149,11 @@ if (isset($_POST['submitComment'])) {
         $comments->id_dwwm_games = $_GET['id'];
         $comments->dateHour = $dateHour;
         if ($comments->addComments()) {
-            $isSuccess = TRUE;
+            $commentSuccess = TRUE;
             header('Location:gameDetails.php?id=' . $games->id);
             exit();
         } else {
-            $isError = TRUE;
+            $commentError = TRUE;
         }
     }
 }

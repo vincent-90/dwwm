@@ -105,3 +105,6 @@ right: 20px;
 cursor: pointer;
 display:none;
 }
+#badGateway{
+    background-color: black;
+}

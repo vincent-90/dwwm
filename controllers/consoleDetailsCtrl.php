@@ -117,6 +117,8 @@ $comments = new comments();
 $comments->id_dwwm_consoles = $consoles->id;
 $isComment = $comments->getCommentsByConsole();
 
+$commentSuccess = FALSE;
+$commentError = FALSE;
 $dateHour = date('Y-m-d H:i:s');
 
 if (isset($_POST['submitComment'])) {
@@ -135,11 +137,11 @@ if (isset($_POST['submitComment'])) {
         $comments->id_dwwm_games = NULL;
         $comments->dateHour = $dateHour;
         if ($comments->addComments()) {
-            $isSuccess = TRUE;
+            $commentSuccess = TRUE;
             header('Location:consoleDetails.php?id=' . $consoles->id);
             exit();
         } else {
-            $isError = TRUE;
+            $commentError = TRUE;
         }
     }
 }

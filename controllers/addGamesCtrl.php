@@ -1,13 +1,8 @@
 <?php
-//instanciation de l'objet consoles. 
-//$consoles devient une instance de la classe consoles.
-//la méthode magique construct est appelée automatiquement grâce au mot clé new.
+
 $consoles = new consoles();
 $consolesList = $consoles->getConsolesList();
 
-//instanciation de l'objet games. 
-//$games devient une instance de la classe games.
-//la méthode magique construct est appelée automatiquement grâce au mot clé new.
 $games = new games();
 
 //déclaration des regex :

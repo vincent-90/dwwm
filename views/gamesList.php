@@ -35,7 +35,7 @@ include 'header.php';
                     <tbody>
                         <?php foreach ($gamesList as $game) { ?>
                             <tr>
-                                <td><img src="../uploads/games/<?= $game->image; ?>" width="150" class="img-fluid"/></td>
+                                <td><img src="../uploads/games/<?= $game->image; ?>" width="150" class="img-fluid" alt="jaquette"/></td>
                                 <td><?= $game->name; ?></td>
                                 <td><?= $game->title; ?></td>
                                 <td><?= $game->date; ?></td>

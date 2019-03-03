@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
 
     //si aucune erreur n'a été comptabilisé
     if (count($formError) == 0) {
-        $users->id = $_GET['id'];
+        $users->id = $_SESSION['id'];
         $users->username = $username;
         $users->mail = $mail;
         $users->password = $password;
@@ -149,7 +149,7 @@ if (isset($_POST['submitAvatar'])) {
     }
     //si aucune erreur n'a été comptabilisé
     if (count($formError) == 0) {
-        $users->id = $_GET['id'];
+        $users->id = $_SESSION['id'];
         $users->avatar = $image;
         $updateAvatar = $users->updateAvatar();
         if ($updateAvatar) {

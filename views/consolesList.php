@@ -34,7 +34,7 @@ include 'header.php';
                     <tbody>
                         <?php foreach ($consolesList as $console) { ?>
                             <tr>
-                                <td><img src="../uploads/consoles/<?= $console->image; ?>" width="150" class="img-fluid"/></td>
+                                <td><img src="../uploads/consoles/<?= $console->image; ?>" width="150" class="img-fluid" alt="console"/></td>
                                 <td><?= $console->name; ?></td>
                                 <td><?= $console->date; ?></td>
                                 <td><a class="btn btn-lime" href="consoleDetails.php?id=<?= $console->id; ?>">Détails</a></td>

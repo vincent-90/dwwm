@@ -1,0 +1,13 @@
+# Redirection erreur 404 :
+ErrorDocument 404 http://dwwm/views/404.php
+# Blocage de la visibilité du fichier config.php
+<Files configuration.php>
+order allow,deny
+deny from all
+</Files>
+# Protection du fichier .htaccess
+<Files ~ "^.*.([Hh][Tt][AaPp])">
+order allow,deny
+deny from all
+satisfy all
+</Files>

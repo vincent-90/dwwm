@@ -7,7 +7,7 @@ include 'header.php';
     <div class="row">
         <div class="text-center col-12">
             <h1 class="title">Inscription</h1>
-            <form method="POST" action="">
+            <form method="POST" action="register.php">
                 <fieldset class="window">
                     <legend><strong>Créer un compte</strong></legend>
                     <?php if ($isSuccess) { ?>
@@ -38,7 +38,7 @@ include 'header.php';
                         <div class="form-row">             
                             <label for="mailConfirm" class="col-sm-2 col-form-label">Confirmer adresse mail :</label>
                             <div class="col-sm-10">
-                                <input name="mailConfirm" type="email" class="form-control" id="mail" placeholder="E-mail de confirmation" value="<?= isset($mailConfirm) ? $mailConfirm : '' ?>"/>
+                                <input name="mailConfirm" type="email" class="form-control" id="mailConfirm" placeholder="E-mail de confirmation" value="<?= isset($mailConfirm) ? $mailConfirm : '' ?>"/>
                                 <p class="text-danger"><?= isset($formError['mailConfirm']) ? $formError['mailConfirm'] : '' ?></p>
                             </div>
                         </div>
