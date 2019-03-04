@@ -7,7 +7,7 @@ include 'header.php';
     <div class="row">
         <div class="text-center col-12">
             <h1 class="title">Liste des jeux</h1>
-<?php
+            <?php
             if (isset($_GET['idDelete'])) {
                 if ($isDelete) {
                     ?>
@@ -27,8 +27,8 @@ include 'header.php';
                             <th scope="col">Titre</th>
                             <th scope="col">Sortie</th>
                             <th scope="col">Détail</th>
-                            <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 57) { ?>
-                            <th scope="col">Effacer</th>
+                            <?php if (isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 57) { ?>
+                                <th scope="col">Effacer</th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -40,8 +40,11 @@ include 'header.php';
                                 <td><?= $game->title; ?></td>
                                 <td><?= $game->date; ?></td>
                                 <td><a class="btn btn-lime" href="gameDetails.php?id=<?= $game->id; ?>">Détails</a></td>
-                      <?php if(isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 57) { ?>
-                                <td><a class="btn btn-danger" href="gamesList.php?idDelete=<?= $game->id ?>">Effacer</a></td>
+                                <?php if (isset($_SESSION['isConnect']) && $_SESSION['id_dwwm_grades'] == 57) { ?>
+                                    <td>
+                                        <div><a class="btn btn-danger" href="gamesList.php?idDelete=<?= $game->id ?>">Effacer</a></div>
+                                        <div>Attention, cette action est irréversible.</div>
+                                    </td>
                                 <?php } ?>
                             </tr>
                         <?php } ?>                 
