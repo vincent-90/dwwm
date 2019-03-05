@@ -1,7 +1,7 @@
 <?php
 
 class database {
-
+    //L'accès aux éléments protégés est limité à la classe elle-même, ainsi qu'aux classes parents et enfants
     protected $db;
 
     function __construct() {

@@ -9,7 +9,8 @@ include '../controllers/headerCtrl.php';
         <link href="../assets/css/style.css" rel="stylesheet"/>
         <link href="../assets/MDB-Free_4.6.1/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="../assets/MDB-Free_4.6.1/css/mdb.min.css" rel="stylesheet"/>
-        <title>projet</title>
+        <link rel="icon" type="image/ico" href="../assets/img/icon.png"/>
+        <title>L'amour est dans le Play</title>
     </head>
     <body>
         <header>

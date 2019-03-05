@@ -47,7 +47,7 @@ class comments extends database {
         return $result;
     }
     
-        //méthode permettant d'afficher les commentaires d'après l'id d'un jeu.
+    //méthode permettant d'afficher les commentaires d'après l'id d'un jeu.
     public function getCommentsByGame() {
         $result = array();
         $query = 'SELECT `dwwm_users`.`username`, `dwwm_users`.`avatar`, '

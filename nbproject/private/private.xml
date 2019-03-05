@@ -12,11 +12,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/vincent/www/dwwm/assets/css/style.css</file>
-            <file>file:/home/vincent/www/dwwm/controllers/gameDetailsCtrl.php</file>
-            <file>file:/home/vincent/www/dwwm/views/gameDetails.php</file>
-            <file>file:/home/vincent/www/dwwm/views/index.php</file>
-            <file>file:/home/vincent/www/dwwm/views/footer.php</file>
+            <file>file:/home/vincent/www/dwwm/assets/js/script.js</file>
+            <file>file:/home/vincent/www/dwwm/views/header.php</file>
             <file>file:/home/vincent/www/dwwm/models/consoles.php</file>
         </group>
     </open-files>

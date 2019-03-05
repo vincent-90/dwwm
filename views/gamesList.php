@@ -11,9 +11,9 @@ include 'header.php';
             if (isset($_GET['idDelete'])) {
                 if ($isDelete) {
                     ?>
-                    <p class="text-success form">Le jeu est bien supprimé !</p>
+                    <p class="text-success window">Le jeu est bien supprimé !</p>
                 <?php } else { ?>
-                    <p class="text-danger form">Echec de la suppression !</p>
+                    <p class="text-danger window">Echec de la suppression !</p>
                     <?php
                 }
             }
